@@ -221,5 +221,18 @@ response_rate(dataset$Anxiety_interference)
 boxplot(dataset$Anxiety_interference)
 
 #################################################################################
+# Non-suicidal self-injury and eating behavior
+#################################################################################
+
+# Frequency of non-suicidal self-injury as percentage of sample
+# who engaged in at least one type of NSSI over the past year 
+#?????
+
+# Level of eating behavior impairment
+#overall mental health  (scale:1-5)
+mean(dataset$ED_total, na.rm=TRUE) 
+response_rate(dataset$ED_total)
+
+#################################################################################
 # 
 #################################################################################
