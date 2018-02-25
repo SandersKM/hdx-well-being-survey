@@ -18,8 +18,8 @@ response_rate <- function(col){
 # who engaged in at least one type of NSSI over the past year 
 #?????
 
-# Level of eating behavior impairment
-#overall mental health  (scale:1-5)
+# Level of eating behavior impairment 
+# (scale:0-45) >16 = At Risk
 mean(dataset$ED_total, na.rm=TRUE) 
 response_rate(dataset$ED_total)
 

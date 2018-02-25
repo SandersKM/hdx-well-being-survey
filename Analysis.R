@@ -30,7 +30,7 @@ response_rate(dataset$Overall_PH_R)
 mean(dataset$Overall_stress, na.rm=TRUE) 
 response_rate(dataset$Overall_stress)
 
-#hours per week exersising (open-ended)
+#hours per week exercising (open-ended)
 min(dataset$Hours_exercising, na.rm=TRUE) #minimum
 max(dataset$Hours_exercising, na.rm=TRUE) #maximum
 mean(dataset$Hours_exercising, na.rm=TRUE) #including outliers
@@ -66,7 +66,7 @@ mean(dataset$PE_avg, na.rm=TRUE)
 response_rate(dataset$PE_avg)
 boxplot(dataset$PE_avg)
 
-# Level of resiliance (scale 1-5)
+# Level of resilience (scale 1-5)
 mean(dataset$Resilience_avg, na.rm=TRUE) 
 response_rate(dataset$Resilience_avg)
 boxplot(dataset$Resilience_avg)
@@ -228,8 +228,8 @@ boxplot(dataset$Anxiety_interference)
 # who engaged in at least one type of NSSI over the past year 
 #?????
 
-# Level of eating behavior impairment
-#overall mental health  (scale:1-5)
+# Level of eating behavior impairment 
+# (scale:0-45) >16 = At Risk
 mean(dataset$ED_total, na.rm=TRUE) 
 response_rate(dataset$ED_total)
 
