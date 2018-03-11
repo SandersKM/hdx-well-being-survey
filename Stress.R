@@ -1,7 +1,7 @@
 library(readxl) #library used to import Excel data
 # import the Hendrix Well Being Survey Data (change location for your own HWBS Data)
 dataset <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
-rownum <- 531 #total number of responses recorded
+rownum <- 531 #total number of responses recorded. Change with new data!
 
 #################################################################################
 # Stress
@@ -22,6 +22,8 @@ Stress_total_var <- var(dataset$Stress_total, na.rm = TRUE)
 sqrt(Stress_total_var)
 response_rate(dataset$Stress_total)
 
+# Function for getting frequency of how many people checked each stressor
+# Erase "rownum" from return if you just want counts and not freqency.
 count_stressors <- function(category){
   count <- 0
   for(i in 1:rownum){
@@ -29,9 +31,10 @@ count_stressors <- function(category){
       count <- count + 1
     }
   }
-  return(count)
+  return(count/rownum)
 }
 
+# Count how many ppl checked each kind of stressor
 Stressor_schoolfinances_count <- count_stressors(dataset$Stressor_schoolfinances)
 Stressor_schoolwork_count <-count_stressors(dataset$Stressor_schoolwork)
 Stressor_employment_count <-count_stressors(dataset$Stressor_employment)
@@ -64,7 +67,31 @@ Stressor_discrim_count <-count_stressors(dataset$Stressor_discrim)
 Stressor_supportingothersMH_count <-count_stressors(dataset$Stressor_supportingothersMH)
 Stressor_other_count <-count_stressors(dataset$Stressor_other)
 
+# put stressors in dataframe
+Stressors_all <- data.frame(Stressor_academicperf_count, Stressor_academicplanning_count, 
+                            Stressor_appearance_count, Stressor_changelivingcond_count, 
+                            Stressor_discrim_count, Stressor_employment_count, 
+                            Stressor_extracurriculars_count, Stressor_familypressure_count, 
+                            Stressor_familyrelationships_count, Stressor_future_count, 
+                            Stressor_familyresponsibilities_count,Stressor_romrelationships_count, 
+                            Stressor_friendrelationships_count, Stressor_identity_count, 
+                            Stressor_illnessinjury_count, Stressor_lonely_count, 
+                            Stressor_MH_count, Stressor_other_count, Stressor_PH_count,
+                            Stressor_politics_count, Stressor_professors_count, 
+                            Stressor_roommaterelationships_count, Stressor_safety_count, 
+                            Stressor_schoolfinances_count, Stressor_schoolwork_count,
+                            Stressor_sleep_count, Stressor_SNS_count, Stressor_social_count, 
+                            Stressor_supportingothersMH_count, Stressor_timeforself_count, 
+                            Stressor_timemange_count)
 
+# sort columns in order of highest stressors to lowest stressor.
+Stressors_all_sorted <- sort(Stressors_all, decreasing = TRUE)
+
+# Top 5 Stressors
+Stressors_top_5 <- Stressors_all_sorted[order(Stressors_all_sorted, decreasing = TRUE)[1:5]]
+
+#bad plot of all stressors (needs improvement)
+Stressors_all_plot <- boxplot(Stressors_all_sorted)
 
 #################################################################################
 # Peceptions of Stress
