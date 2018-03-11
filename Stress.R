@@ -1,3 +1,7 @@
+#Libraries for graphing in R
+library(rlang)
+library(ggplot2)
+
 library(readxl) #library used to import Excel data
 # import the Hendrix Well Being Survey Data (change location for your own HWBS Data)
 dataset <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
@@ -91,12 +95,53 @@ Stressors_all_sorted <- sort(Stressors_all, decreasing = TRUE)
 Stressors_top_5 <- Stressors_all_sorted[order(Stressors_all_sorted, decreasing = TRUE)[1:5]]
 
 #bad plot of all stressors (needs improvement)
-Stressors_all_plot <- boxplot(Stressors_all_sorted)
+stressor_values_sorted_vertex <- as.numeric(Stressors_all_sorted[1,])
+stressor_names_sorted_vertex <- c(colnames(Stressors_all_sorted))
+stressor_barplot_sorted <-  barplot(stressor_values_sorted_vertex,
+                                names.arg = stressor_names_sorted_vertex,  
+                                xlab = "Stressor",ylab = "Frequency",main = "Stressors",las=2)
+stressor_values_vertex_top_5 <- as.numeric(Stressors_top_5[1,])
+stressor_names_vertex_top_5 <- c(colnames(Stressors_top_5))
+stressor_barplot_top_5 <-  barplot(stressor_values_vertex_top_5,
+                                    names.arg = stressor_names_vertex_top_5 ,  
+                                    xlab = "Stressor",ylab = "Frequency",main = "Stressors",las=2)
 
 #################################################################################
 # Peceptions of Stress
 #################################################################################
 
+
+# Beliefs about how stress affects people's health
+# -4 = Bad, 4 = Good
+mean(dataset$Stress_and_health, na.rm=TRUE) 
+Stress_and_health_var <- var(dataset$Stress_and_health, na.rm = TRUE)
+sqrt(Stress_and_health_var)
+response_rate(dataset$Stress_and_health)
+boxplot(dataset$Stress_and_health)
+
+# To what extent do you think stress negatively affects your personal happiness
+# Scale (0-6)
+mean(dataset$Stress_and_happiness, na.rm=TRUE) 
+Stress_and_happiness_var <- var(dataset$Stress_and_happiness, na.rm = TRUE)
+sqrt(Stress_and_happiness_var)
+response_rate(dataset$Stress_and_happiness)
+boxplot(dataset$Stress_and_happiness)
+
+# To what extent do you think stress negatively affects your personal Mental Health
+# Scale (0-6)
+mean(dataset$Stress_and_MH, na.rm=TRUE) 
+Stress_and_MH_var <- var(dataset$Stress_and_MH, na.rm = TRUE)
+sqrt(Stress_and_MH_var)
+response_rate(dataset$Stress_and_MH)
+boxplot(dataset$Stress_and_MH)
+
+# To what extent do you think stress negatively affects your personal Physical Health
+# Scale (0-6)
+mean(dataset$Stress_and_PH, na.rm=TRUE) 
+Stress_and_PH_var <- var(dataset$Stress_and_PH, na.rm = TRUE)
+sqrt(Stress_and_PH_var)
+response_rate(dataset$Stress_and_PH)
+boxplot(dataset$Stress_and_PH)
 
 #################################################################################
 # Coping with Stress
