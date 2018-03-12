@@ -37,7 +37,8 @@ mean(dataset$Overall_stress, na.rm=TRUE)
 response_rate(dataset$Overall_stress)
 Overall_stress_var <- var(dataset$Overall_stress, na.rm = TRUE)
 sqrt(Overall_stress_var)#Standard Deviation
-
+boxplot(dataset$Overall_stress) #Having less low stress is an outlier.
+median(dataset$Overall_stress, na.rm = TRUE)
 
 #hours per week exersising (open-ended)
 min(dataset$Hours_exercising, na.rm=TRUE) #minimum
