@@ -17,18 +17,27 @@ response_rate <- function(col){
 #overall mental health  (scale:1-5)
 mean(dataset$Overall_MH_R, na.rm=TRUE) 
 response_rate(dataset$Overall_MH_R)
+Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
+sqrt(Overall_MH_R_var) #Standard Deviation
 
 #“I see myself as a person with mental illness” (scale:1-6)
 mean(dataset$MI_identity_R, na.rm=TRUE) 
 response_rate(dataset$MI_identity_R)
+MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
+sqrt(MI_identity_R_var)#Standard Deviation
 
 #overall physical health (scale: 1-5)
 mean(dataset$Overall_PH_R, na.rm=TRUE) 
 response_rate(dataset$Overall_PH_R)
+Overall_PH_R_var <- var(dataset$Overall_PH_R, na.rm = TRUE)
+sqrt(Overall_PH_R_var)#Standard Deviation
 
 #overall stress (scale: 1-10)
 mean(dataset$Overall_stress, na.rm=TRUE) 
 response_rate(dataset$Overall_stress)
+Overall_stress_var <- var(dataset$Overall_stress, na.rm = TRUE)
+sqrt(Overall_stress_var)#Standard Deviation
+
 
 #hours per week exersising (open-ended)
 min(dataset$Hours_exercising, na.rm=TRUE) #minimum
@@ -39,15 +48,23 @@ response_rate(dataset$Hours_exercising)
 Q1_hours_exercising <- summary(dataset$Hours_exercising)[["1st Qu."]]
 Q3_hours_exercising <-summary(dataset$Hours_exercising)[["3rd Qu."]]
 IQR_hours_exercising <- Q3_hours_exercising - Q1_hours_exercising
+Hours_exercising_var <- var(dataset$Hours_exercising, na.rm = TRUE)
+sqrt(Hours_exercising_var) #Standard Deviation
+
 
 # typical hours of sleep per night (open-ended)
 min(dataset$Hours_sleep, na.rm=TRUE) #minimum
 max(dataset$Hours_sleep, na.rm=TRUE) #maximum
 mean(dataset$Hours_sleep, na.rm=TRUE) 
 response_rate(dataset$Hours_sleep)
+Hours_sleep_var <- var(dataset$Hours_sleep, na.rm = TRUE)
+sqrt(Hours_sleep_var)#Standard Deviation
+
 
 #how respondents feel the campus environment at Hendrix 
 #impacts students’ mental health (scale: -3 to +3)
 mean(dataset$HDX_MH_impact, na.rm=TRUE) 
 response_rate(dataset$HDX_MH_impact)
 boxplot(dataset$HDX_MH_impact) #the responses here are very symetrical 
+HDX_MH_impact_var <- var(dataset$HDX_MH_impact, na.rm = TRUE)
+sqrt(HDX_MH_impact_var)#Standard Deviation
