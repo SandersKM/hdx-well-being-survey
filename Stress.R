@@ -143,6 +143,21 @@ sqrt(Stress_and_PH_var)
 response_rate(dataset$Stress_and_PH)
 boxplot(dataset$Stress_and_PH)
 
+#Looking at Correlations and Covariances 
+# using Pearson's Method and casewise deletions for missing data
+
+# Between Overall Stress and Overall Mental Health
+cor(dataset$Overall_stress, dataset$Overall_MH, use="complete.obs", method="pearson")
+cov(dataset$Overall_stress, dataset$Overall_MH, use="complete.obs", method="pearson")
+
+# Between Overall Stress and Overall Physical Health
+cor(dataset$Overall_stress, dataset$Overall_PH, use="complete.obs", method="pearson")
+cov(dataset$Overall_stress, dataset$Overall_PH,  use="complete.obs", method="pearson")
+
+# Between Overall Stress and Positive Emotions
+cor(dataset$Overall_stress, dataset$PE_avg, use="complete.obs", method="pearson")
+cov(dataset$Overall_stress, dataset$PE_avg, use="complete.obs", method="pearson")
+
 #################################################################################
 # Coping with Stress
 #################################################################################

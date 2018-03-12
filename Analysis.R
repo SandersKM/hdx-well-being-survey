@@ -402,6 +402,27 @@ Stress_and_health_var <- var(dataset$Stress_and_health, na.rm = TRUE)
 Stress_and_health_std <- sqrt(Stress_and_health_var)
 Stress_and_health_rr <- response_rate(dataset$Stress_and_health)
 
+#Looking at Correlations and Covariances 
+# using Pearson's Method and casewise deletions for missing data
+
+# Between Overall Stress and Overall Mental Health
+cor_overall_stress_overall_MH <- cor(dataset$Overall_stress, dataset$Overall_MH,
+                                     use="complete.obs", method="pearson")
+cov_overall_stress_overall_MH <- cov(dataset$Overall_stress, dataset$Overall_MH, 
+                                     use="complete.obs", method="pearson")
+
+# Between Overall Stress and Overall Physical Health
+cor_overall_stress_overall_PH <- cor(dataset$Overall_stress, dataset$Overall_PH,
+                                     use="complete.obs", method="pearson")
+cov_overall_stress_overall_PH <- cov(dataset$Overall_stress, dataset$Overall_PH, 
+                                     use="complete.obs", method="pearson")
+
+# Between Overall Stress and Positive Emotions
+cor_overall_stress_overall_PE_avg <- cor(dataset$Overall_stress, dataset$PE_avg,
+                                         use="complete.obs", method="pearson")
+cov_overall_stress_overall_PE_avg <- cov(dataset$Overall_stress, dataset$PE_avg, 
+                                         use="complete.obs", method="pearson")
+
 
 #################################################################################
 # Coping with Stress
