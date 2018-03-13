@@ -40,7 +40,7 @@ sqrt(Overall_stress_var)#Standard Deviation
 boxplot(dataset$Overall_stress) #Having less low stress is an outlier.
 median(dataset$Overall_stress, na.rm = TRUE)
 
-#hours per week exersising (open-ended)
+#hours per week exercising (open-ended)
 min(dataset$Hours_exercising, na.rm=TRUE) #minimum
 max(dataset$Hours_exercising, na.rm=TRUE) #maximum
 mean(dataset$Hours_exercising, na.rm=TRUE) #including outliers
@@ -51,6 +51,21 @@ Q3_hours_exercising <-summary(dataset$Hours_exercising)[["3rd Qu."]]
 IQR_hours_exercising <- Q3_hours_exercising - Q1_hours_exercising
 Hours_exercising_var <- var(dataset$Hours_exercising, na.rm = TRUE)
 sqrt(Hours_exercising_var) #Standard Deviation
+
+#excluded values above 60 for hours of exercise per week
+no_extreme_outliers <- outlierReplace(dataset, "Hours_exercising",
+                                      which(dataset$Hours_exercising > 60), NA)
+Hours_exercising_no_extreme_outliers <- no_extreme_outliers$Hours_exercising
+min(Hours_exercising_no_extreme_outliers, na.rm=TRUE) #minimum
+max(Hours_exercising_no_extreme_outliers, na.rm=TRUE) #maximum
+mean(Hours_exercising_no_extreme_outliers, na.rm=TRUE) #including all but maxiumum outlier
+Hours_exercising_no_extreme_outliers_var <- var(Hours_exercising_no_extreme_outliers, na.rm = TRUE)
+sqrt(Hours_exercising_no_extreme_outliers_var)
+boxplot(Hours_exercising_no_extreme_outliers) #Boxplot with outliers
+response_rate(Hours_exercising_no_extreme_outliers)
+Hours_exercising_no_extreme_outliers_q1 <- summary(Hours_exercising_no_extreme_outliers)[["1st Qu."]]
+Hours_exercising_no_extreme_outliers_q3  <-summary(Hours_exercising_no_extreme_outliers)[["3rd Qu."]]
+Hours_exercising_no_extreme_outliers_q3  - Hours_exercising_no_extreme_outliers_q1 #IQR
 
 
 # typical hours of sleep per night (open-ended)
