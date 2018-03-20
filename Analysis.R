@@ -26,6 +26,12 @@ response_rate <- function(col){
   return(rr)
 }
 
+#function for getting the standard deviation
+std <- function(col){
+  var <- var(col, na.rm = TRUE)
+  return(sqrt(var))
+}
+
 #################################################################################
 # At a glance
 #################################################################################
@@ -33,13 +39,13 @@ response_rate <- function(col){
 #overall mental health  (scale:1-5)
 Overall_MH_R_mean <- mean(dataset$Overall_MH_R, na.rm=TRUE)
 Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
-Overall_MH_R_std <- sqrt(Overall_MH_R_var)
+Overall_MH_R_std <- std(dataset$Overall_MH_R)
 Overall_MH_R_rr <- response_rate(dataset$Overall_MH_R)
 
 #“I see myself as a person with mental illness” (scale:1-6)
 MI_identity_R_mean <- mean(dataset$MI_identity_R, na.rm=TRUE) 
 MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
-MI_identity_R_std <- sqrt(MI_identity_R_var)
+MI_identity_R_std <- std(dataset$MI_identity_R)
 MI_identity_R_rr <- response_rate(dataset$MI_identity_R)
 
 #overall physical health (scale: 1-5)
@@ -480,28 +486,28 @@ SHI_total_rr <- response_rate(dataset$SHI_total)
 SHI_total_box <- boxplot(dataset$SHI_total)
 
 # Between total Sleep Hygiene and sleep quality
-cor_SHI_total_Sleep_quality -> cor(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
-cov_SHI_total_Sleep_quality -> cov(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
+cor_SHI_total_Sleep_quality <- cor(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_quality <- cov(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
 
 # Between total Sleep Hygiene and feeling sleepy during the day
-cor_SHI_total_Sleep_hygiene15 -> cor(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
-cov_SHI_total_Sleep_hygiene15 -> cov(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
+cor_SHI_total_Sleep_hygiene15 <- cor(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene15 <- cov(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
 
 # Between total Sleep Hygiene and worry about sleep
-cor_SHI_total_Sleep_hygiene16 -> cor(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
-cov_SHI_total_Sleep_hygiene16 -> cov(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
+cor_SHI_total_Sleep_hygiene16 <- cor(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene16 <- cov(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
 
 # Between total Sleep Hygiene and feeling more moody now than before
-cor_SHI_total_Sleep_hygiene17 -> cor(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
-cov_SHI_total_Sleep_hygiene17 -> cov(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
+cor_SHI_total_Sleep_hygiene17 <- cor(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene17 <- cov(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
 
 # Between total Sleep Hygiene and feeling like it takes more effort to get things done
-cor_SHI_total_Sleep_hygiene18 -> cor(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
-cov_SHI_total_Sleep_hygiene18 -> cov(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
+cor_SHI_total_Sleep_hygiene18 <- cor(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene18 <- cov(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
 
 # Between total Sleep Hygiene and having more trouble paying attention and thinking than before
-cor_SHI_total_Sleep_hygiene19 -> cor(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
-cov_SHI_total_Sleep_hygiene19 -> cov(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
+cor_SHI_total_Sleep_hygiene19 <- cor(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene19 <- cov(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
 
 #################################################################################
 # 

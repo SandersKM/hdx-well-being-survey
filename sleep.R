@@ -10,6 +10,13 @@ response_rate <- function(col){
   return(rr)
 }
 
+#function for getting the standard deviation
+std <- function(col){
+  var <- var(col, na.rm = TRUE)
+  return(sqrt(var))
+}
+
+
 #################################################################################
 # Sleep
 #################################################################################
@@ -19,7 +26,7 @@ min(dataset$Hours_sleep, na.rm=TRUE) #minimum
 max(dataset$Hours_sleep, na.rm=TRUE) #maximum
 mean(dataset$Hours_sleep, na.rm=TRUE) 
 var(dataset$Hours_sleep, na.rm = TRUE)
-sqrt(Hours_sleep_var)
+std(dataset$Hours_sleep)
 response_rate(dataset$Hours_sleep)
 
 #Sleep Quality (Scale: 1=very good - 4=very bad)
@@ -27,7 +34,7 @@ min(dataset$Sleep_quality, na.rm=TRUE) #minimum
 max(dataset$Sleep_quality, na.rm=TRUE) #maximum
 mean(dataset$Sleep_quality, na.rm=TRUE) 
 var(dataset$Sleep_quality, na.rm = TRUE)
-sqrt(Sleep_quality_var)
+std(dataset$Sleep_quality)
 response_rate(dataset$Sleep_quality)
 boxplot(dataset$Sleep_quality)
 
@@ -36,7 +43,7 @@ min(dataset$SHI_total, na.rm=TRUE) #minimum
 max(dataset$SHI_total, na.rm=TRUE) #maximum
 mean(dataset$SHI_total, na.rm=TRUE) 
 var(dataset$SHI_total, na.rm = TRUE)
-sqrt(SHI_total_var)
+std(dataset$SHI_total)
 response_rate(dataset$SHI_total)
 boxplot(dataset$SHI_total)
 
