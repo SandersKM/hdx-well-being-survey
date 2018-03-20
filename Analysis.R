@@ -67,35 +67,26 @@ outlierReplace = function(dataframe, cols, rows, newValue = NA) {
 }
 
 #hours per week exercising (open-ended)
-Hours_exercising_min <- min(dataset$Hours_exercising, na.rm=TRUE) #minimum
-Hours_exercising_max <- max(dataset$Hours_exercising, na.rm=TRUE) #maximum
 Hours_exercising_mean <- mean(dataset$Hours_exercising, na.rm=TRUE) #including outliers
 Hours_exercising_var <- var(dataset$Hours_exercising, na.rm = TRUE)
 Hours_exercising_std <- sqrt(Hours_exercising_var)
 Hours_exercising_box <- boxplot(dataset$Hours_exercising) #Boxplot with outliers
 Hours_exercising_rr <- response_rate(dataset$Hours_exercising)
-Hours_exercising_q1 <- summary(dataset$Hours_exercising)[["1st Qu."]]
-Hours_exercising_q3  <-summary(dataset$Hours_exercising)[["3rd Qu."]]
-Hours_exercising_iqr <- Hours_exercising_q3 - Hours_exercising_q1 #IQR
+Hours_exercising_summary <- summary(dataset$Hours_exercising)
 
 #excluded values above 60 for hours of exercise per week
 no_extreme_outliers <- outlierReplace(dataset, "Hours_exercising",
                                       which(dataset$Hours_exercising > 60), NA)
 Hours_exercising_no_extreme_outliers <- no_extreme_outliers$Hours_exercising
-Hours_exercising_no_extreme_outliers_min <- min(Hours_exercising_no_extreme_outliers, na.rm=TRUE) #minimum
-Hours_exercising_no_extreme_outliers_max <- max(Hours_exercising_no_extreme_outliers, na.rm=TRUE) #maximum
 Hours_exercising_no_extreme_outliers_mean <- mean(Hours_exercising_no_extreme_outliers, na.rm=TRUE) #including outliers
 Hours_exercising_no_extreme_outliers_var <- var(Hours_exercising_no_extreme_outliers, na.rm = TRUE)
 Hours_exercising_no_extreme_outliers_std <- sqrt(Hours_exercising_no_extreme_outliers_var)
 Hours_exercising_no_extreme_outliers_box <- boxplot(Hours_exercising_no_extreme_outliers) #Boxplot with outliers
 Hours_exercising_no_extreme_outliers_rr <- response_rate(Hours_exercising_no_extreme_outliers)
-Hours_exercising_no_extreme_outliers_q1 <- summary(Hours_exercising_no_extreme_outliers)[["1st Qu."]]
-Hours_exercising_no_extreme_outliers_q3  <-summary(Hours_exercising_no_extreme_outliers)[["3rd Qu."]]
-Hours_exercising_no_extreme_outliers_iqr <- Hours_exercising_no_extreme_outliers_q3  - Hours_exercising_no_extreme_outliers_q1 #IQR
+Hours_exercising_no_extreme_outliers_summary <- summary(Hours_exercising_no_extreme_outliers) #min, max, median, quartiles
 
 # typical hours of sleep per night (open-ended)
-Hours_sleep_min <- min(dataset$Hours_sleep, na.rm=TRUE) #minimum
-Hours_sleep_max <- max(dataset$Hours_sleep, na.rm=TRUE) #maximum
+Hours_sleep_summary <- summary(dataset$Hours_sleep)
 Hours_sleep_mean <- mean(dataset$Hours_sleep, na.rm=TRUE) 
 Hours_sleep_var <- var(dataset$Hours_sleep, na.rm = TRUE)
 Hours_sleep_std <- sqrt(Hours_sleep_var)
@@ -474,7 +465,7 @@ Sleep_quality_mean <- mean(dataset$Sleep_quality, na.rm=TRUE)
 Sleep_quality_var <- var(dataset$Sleep_quality, na.rm = TRUE)
 Sleep_quality_std <- sqrt(Sleep_quality_var)
 Sleep_quality_rr <- response_rate(dataset$Sleep_quality)
-Sleep_quality_boxboxplot(dataset$Sleep_quality)
+Sleep_quality_box <- boxplot(dataset$Sleep_quality)
 
 #Sleep Hygiene (Scale: 14=very good - 70=very bad)
 SHI_total_min <- min(dataset$SHI_total, na.rm=TRUE) #minimum
