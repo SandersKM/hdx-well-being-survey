@@ -9,14 +9,9 @@ rownum <- 531 #total number of responses recorded. Change with new data!
 
 # Function for getting frequency of how many people checked each box
 # Erase "rownum" from return if you just want counts and not freqency.
-freq_bool <- function(category){
-  count <- 0
-  for(i in 1:rownum){
-    if (category[i] == 1){
-      count <- count + 1
-    }
-  }
-  return(count/rownum)
+freq_bool <- function(col){
+  tbl <- table(na.omit(col))
+  return(sum(tbl[names(tbl)==1])/sum(tbl))
 }
 
 #################################################################################
