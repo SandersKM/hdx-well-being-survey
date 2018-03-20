@@ -450,5 +450,59 @@ cov_overall_stress_overall_PE_avg <- cov(dataset$Overall_stress, dataset$PE_avg,
 #################################################################################
 
 #################################################################################
+# Sleep
+#################################################################################
+
+# typical hours of sleep per night (open-ended)
+Hours_sleep_min <- min(dataset$Hours_sleep, na.rm=TRUE) #minimum
+Hours_sleep_max <- max(dataset$Hours_sleep, na.rm=TRUE) #maximum
+Hours_sleep_mean <- mean(dataset$Hours_sleep, na.rm=TRUE) 
+Hours_sleep_var <- var(dataset$Hours_sleep, na.rm = TRUE)
+Hours_sleep_std <- sqrt(Hours_sleep_var)
+Hours_sleep_rr <- response_rate(dataset$Hours_sleep)
+
+#Sleep Quality (Scale: 1=very good - 4=very bad)
+Sleep_quality_min <- min(dataset$Sleep_quality, na.rm=TRUE) #minimum
+Sleep_quality_max <- max(dataset$Sleep_quality, na.rm=TRUE) #maximum
+Sleep_quality_mean <- mean(dataset$Sleep_quality, na.rm=TRUE) 
+Sleep_quality_var <- var(dataset$Sleep_quality, na.rm = TRUE)
+Sleep_quality_std <- sqrt(Sleep_quality_var)
+Sleep_quality_rr <- response_rate(dataset$Sleep_quality)
+Sleep_quality_boxboxplot(dataset$Sleep_quality)
+
+#Sleep Hygiene (Scale: 14=very good - 70=very bad)
+SHI_total_min <- min(dataset$SHI_total, na.rm=TRUE) #minimum
+SHI_total_max <- max(dataset$SHI_total, na.rm=TRUE) #maximum
+SHI_total_mean <- mean(dataset$SHI_total, na.rm=TRUE) 
+SHI_total_var <- var(dataset$SHI_total, na.rm = TRUE)
+SHI_total_std <- sqrt(SHI_total_var)
+SHI_total_rr <- response_rate(dataset$SHI_total)
+SHI_total_box <- boxplot(dataset$SHI_total)
+
+# Between total Sleep Hygiene and sleep quality
+cor_SHI_total_Sleep_quality -> cor(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_quality -> cov(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
+
+# Between total Sleep Hygiene and feeling sleepy during the day
+cor_SHI_total_Sleep_hygiene15 -> cor(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene15 -> cov(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
+
+# Between total Sleep Hygiene and worry about sleep
+cor_SHI_total_Sleep_hygiene16 -> cor(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene16 -> cov(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
+
+# Between total Sleep Hygiene and feeling more moody now than before
+cor_SHI_total_Sleep_hygiene17 -> cor(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene17 -> cov(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
+
+# Between total Sleep Hygiene and feeling like it takes more effort to get things done
+cor_SHI_total_Sleep_hygiene18 -> cor(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene18 -> cov(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
+
+# Between total Sleep Hygiene and having more trouble paying attention and thinking than before
+cor_SHI_total_Sleep_hygiene19 -> cor(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
+cov_SHI_total_Sleep_hygiene19 -> cov(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
+
+#################################################################################
 # 
 #################################################################################
