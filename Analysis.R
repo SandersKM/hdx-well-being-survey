@@ -32,6 +32,13 @@ std <- function(col){
   return(sqrt(var))
 }
 
+#frequeny of people who answered "yes"
+#percentage with scores above 0:
+freq_bool <- function(col){
+  tbl <- table(na.omit(col))
+  return(sum(tbl[names(tbl)==1])/sum(tbl))
+}
+
 #################################################################################
 # At a glance
 #################################################################################
@@ -301,15 +308,6 @@ ED_total_var <- var(dataset$ED_total, na.rm = TRUE)
 ED_total_std <- sqrt(ED_total_var)
 ED_total_rr <- response_rate(dataset$ED_total)
 
-#Libraries for graphing in R
-library(rlang)
-library(ggplot2)
-
-library(readxl) #library used to import Excel data
-# import the Hendrix Well Being Survey Data (change location for your own HWBS Data)
-dataset <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
-rownum <- 531 #total number of responses recorded. Change with new data!
-
 #################################################################################
 # Stress
 #################################################################################
@@ -499,6 +497,45 @@ cov_SHI_total_Sleep_hygiene18 <- cov(dataset$SHI_total, dataset$Sleep_hygiene18,
 # Between total Sleep Hygiene and having more trouble paying attention and thinking than before
 cor_SHI_total_Sleep_hygiene19 <- cor(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_hygiene19 <- cov(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
+
+#################################################################################
+# General Mental Health Knowledge
+#################################################################################
+
+#Recognizing someone in distress (1 = Strongly Agree - 6 = Strongly Disagree)
+Recognize_distress_mean <- mean(dataset$Recognize_distress, na.rm=TRUE) 
+Recognize_distress_var <- var(dataset$Recognize_distress, na.rm = TRUE)
+Recognize_distress_std <- std(dataset$Recognize_distress)
+Recognize_distress_rr <- response_rate(dataset$Recognize_distress)
+Recognize_distress_box  <- boxplot(dataset$Recognize_distress)
+
+#I feel confident in helping someone with a mental health problem.
+#(1 = Strongly Agree - 6 = Strongly Disagree)
+Helping_confidence_mean <- mean(dataset$Helping_confidence, na.rm=TRUE) 
+Helping_confidence_var <- var(dataset$Helping_confidence, na.rm = TRUE)
+Helping_confidence_std <- std(dataset$Helping_confidence)
+Helping_confidence_rr <- response_rate(dataset$Helping_confidence)
+Helping_confidence_box <- boxplot(dataset$Helping_confidence)
+
+#Knowing where to go for mental health help
+#(1 = Strongly Agree - 6 = Strongly Disagree)
+MH_know_where_to_go_mean <- mean(dataset$MH_know_where_to_go, na.rm=TRUE) 
+MH_know_where_to_go_var <- var(dataset$MH_know_where_to_go, na.rm = TRUE)
+MH_know_where_to_go_std <- std(dataset$MH_know_where_to_go)
+MH_know_where_to_go_rr <- response_rate(dataset$MH_know_where_to_go)
+MH_know_where_to_go_box <- boxplot(dataset$MH_know_where_to_go)
+
+##Knowing where to go for physical health help
+#(1 = Strongly Agree - 6 = Strongly Disagree)
+PH_know_where_to_go_mean <- mean(dataset$PH_know_where_to_go, na.rm=TRUE) 
+PH_know_where_to_go_var <- var(dataset$PH_know_where_to_go, na.rm = TRUE)
+PH_know_where_to_go_std <- std(dataset$PH_know_where_to_go)
+PH_know_where_to_go_rr <- response_rate(dataset$PH_know_where_to_go)
+PH_know_where_to_go_box <- boxplot(dataset$PH_know_where_to_go)
+
+#Percentage of students who have participated in MH training
+MH_training_freq <- freq_bool(na.omit(dataset$MH_training))
+
 
 #################################################################################
 # 
