@@ -654,6 +654,82 @@ HelpingOthers_academic_impact_tbl <- table(dataset$HelpingOthers_academic_impact
 Relationships_academic_impact_tbl <- table(dataset$Relationships_academic_impact)
 Discrimination_academic_impact_tbl <- table(dataset$Discrimination_academic_impact)
 
+#################################################################################
+# Interrelationships
+#################################################################################
+
+# Between Anxiety and Depression
+Anxiety_total_Depression_total_cor <- cor(dataset$Depression_total, dataset$Anxiety_total, use="complete.obs", method="pearson")
+Anxiety_total_Depression_total_cov <- cov(dataset$Depression_total, dataset$Anxiety_total, use="complete.obs", method="pearson")
+
+#Between Hours of Sleep and Depression
+Depression_total_Hours_sleep_cor <- cor(dataset$Depression_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+Depression_total_Hours_sleep_cov <- cov(dataset$Depression_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+
+#Between Hours of Sleep and anxiety
+Anxiety_total_Hours_sleep_cor <- cor(dataset$Anxiety_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+Anxiety_total_Hours_sleep_cov <- cov(dataset$Anxiety_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+
+#Between Hours of Sleep and stress
+Overall_stress_Hours_sleep_cor <- cor(dataset$Overall_stress, dataset$Hours_sleep, use="complete.obs", method="pearson")
+Overall_stress_Hours_sleep_cov <- cov(dataset$Overall_stress, dataset$Hours_sleep, use="complete.obs", method="pearson")
+
+#Between Hours of Sleep and Mental Heath Continuum score
+MHCSF_total_Hours_sleep_cor <- cor(dataset$MHCSF_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+MHCSF_total_Hours_sleep_cov <- cov(dataset$MHCSF_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+
+#Between Hours of Sleep and Positive Emotion
+PE_avg_Hours_sleep_cor <- cor(dataset$PE_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
+PE_avg_Hours_sleep_cov <- cov(dataset$PE_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
+
+#Between Hours of Sleep and resilience 
+Resilience_avg_Hours_sleep_cor <- cor(dataset$Resilience_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
+Resilience_avg_Hours_sleep_cov <- cov(dataset$Resilience_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
+
+#Between Stress and Depression
+Depression_total_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$Depression_total, use="complete.obs", method="pearson")
+Depression_total_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$Depression_total, use="complete.obs", method="pearson")
+
+#Between Stress and Anxiety
+Anxiety_total_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$Anxiety_total, use="complete.obs", method="pearson")
+Anxiety_total_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$Anxiety_total, use="complete.obs", method="pearson")
+
+#Between Stress and Mental Health Continuum Score
+MHCSF_total_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$MHCSF_total, use="complete.obs", method="pearson")
+MHCSF_total_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$MHCSF_total, use="complete.obs", method="pearson")
+
+#Between Stress and Positive Emotion
+PE_avg_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$PE_avg, use="complete.obs", method="pearson")
+PE_avg_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$PE_avg, use="complete.obs", method="pearson")
+
+#Between Stress and Resilience
+Resilience_avg_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$Resilience_avg, use="complete.obs", method="pearson")
+Resilience_avg_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$Resilience_avg, use="complete.obs", method="pearson")
+
+#Between Screen Time and Depression
+Depression_total_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Depression_total, use="complete.obs", method="pearson")
+Depression_total_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Depression_total, use="complete.obs", method="pearson")
+
+#Between Screen Time and Anxiety
+Anxiety_total_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Anxiety_total, use="complete.obs", method="pearson")
+Anxiety_total_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Anxiety_total, use="complete.obs", method="pearson")
+
+#Between Screen Time and Mental Health Continuum Score
+MHCSF_total_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$MHCSF_total, use="complete.obs", method="pearson")
+MHCSF_total_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$MHCSF_total, use="complete.obs", method="pearson")
+
+#Between Screen Time and Positive Emotion
+PE_avg_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$PE_avg, use="complete.obs", method="pearson")
+PE_avg_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$PE_avg, use="complete.obs", method="pearson")
+
+#Between Screen Time and Resilience
+Resilience_avg_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Resilience_avg, use="complete.obs", method="pearson")
+Resilience_avg_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Resilience_avg, use="complete.obs", method="pearson")
+
+#Between Screen Time and Overall Stress
+Overall_stress_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Overall_stress, use="complete.obs", method="pearson")
+Overall_stress_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Overall_stress, use="complete.obs", method="pearson")
+
 
 #################################################################################
 # 
