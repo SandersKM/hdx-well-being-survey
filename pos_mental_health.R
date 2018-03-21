@@ -9,6 +9,12 @@ response_rate <- function(col){
   return(rr)
 }
 
+#function for getting the standard deviation
+std <- function(col){
+  var <- var(col, na.rm = TRUE)
+  return(sqrt(var))
+}
+
 #################################################################################
 # Positive mental health
 #################################################################################
@@ -17,27 +23,32 @@ response_rate <- function(col){
 mean(dataset$MHCSF_total, na.rm=TRUE) 
 response_rate(dataset$MHCSF_total)
 boxplot(dataset$MHCSF_total)
+std(dataset$MHCSF_total)
 
 #Level of positive emotions (scale 0-4)
 mean(dataset$PE_avg, na.rm=TRUE) 
 response_rate(dataset$PE_avg)
 boxplot(dataset$PE_avg)
+std(dataset$PE_avg)
 
 # Level of resiliance (scale 1-5)
 mean(dataset$Resilience_avg, na.rm=TRUE) 
 response_rate(dataset$Resilience_avg)
 boxplot(dataset$Resilience_avg)
+std(dataset$Resilience_avg)
 
 # Level of satisfaction with personal 
 #relationships at HDX (scale 1-5)
 mean(dataset$Relationship_satis, na.rm=TRUE) 
 response_rate(dataset$Relationship_satis)
 boxplot(dataset$Relationship_satis)
+std(dataset$Relationship_satis)
 
 # Level of belongingness (scale 9-54)
 mean(dataset$Belonging_total, na.rm=TRUE) 
 response_rate(dataset$Belonging_total)
 boxplot(dataset$Belonging_total)
+std(dataset$Belonging_total)
 
 ######
 #respondents who are considered “flourishing” 
@@ -144,3 +155,4 @@ for(i in 1:rownum){
 
 #percentage of respondents considered flourishing:
 flourishing_count/rownum
+
