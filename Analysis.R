@@ -299,7 +299,8 @@ Anxiety_interference_box <- boxplot(dataset$Anxiety_interference)
 
 # Frequency of non-suicidal self-injury as percentage of sample
 # who engaged in at least one type of NSSI over the past year 
-#?????
+NSSI_total_tbl <- table(na.omit(dataset$NSSI_total))
+sum(NSSI_total_tbl[names(NSSI_total_tbl)>0])/sum(NSSI_total_tbl)
 
 # Level of eating behavior impairment 
 # (scale:0-45) >16 = At Risk
