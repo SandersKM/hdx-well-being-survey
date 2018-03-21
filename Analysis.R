@@ -611,5 +611,24 @@ Barriers_all_sorted_bar <- barplot(as.numeric(Barriers_all_sorted[1,]),
                                    names.arg=c(colnames(Barriers_all_sorted)), las=2)
 
 #################################################################################
+# Mental Health Stigma
+#################################################################################
+
+# General MH stigma (scale: 3-18)
+Stigma_total_mean <- mean(dataset$Stigma_total, na.rm=TRUE) 
+Stigma_total_var <- var(dataset$Stigma_total, na.rm = TRUE)
+Stigma_total_std <- std(dataset$Stigma_total)
+Stigma_total_rr <- response_rate(dataset$Stigma_total)
+Stigma_total_box <- boxplot(dataset$Stigma_total)
+
+# The extent to which an individual conceals their mental illness (scale: 3-18)
+Concealment_total_mean <- mean(dataset$Concealment_total, na.rm=TRUE) 
+Concealment_total_var <- var(dataset$Concealment_total, na.rm = TRUE)
+Concealment_total_std <- std(dataset$Concealment_total)
+Concealment_total_rr <- response_rate(dataset$Concealment_total)
+Concealment_total_box <- boxplot(dataset$Concealment_total)
+
+
+#################################################################################
 # 
 #################################################################################
