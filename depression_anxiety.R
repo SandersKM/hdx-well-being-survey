@@ -10,6 +10,12 @@ response_rate <- function(col){
   return(rr)
 }
 
+#function for getting the standard deviation
+std <- function(col){
+  var <- var(col, na.rm = TRUE)
+  return(sqrt(var))
+}
+
 #################################################################################
 # Depression and anxiety
 #################################################################################
@@ -23,11 +29,13 @@ response_rate <- function(col){
 mean(dataset$Depression_total, na.rm=TRUE) 
 response_rate(dataset$Depression_total)
 boxplot(dataset$Depression_total)
+std(dataset$Depression_total)
 
 # Level of impairment from depression (scale: 0-6)
 mean(dataset$Depression_interference, na.rm=TRUE) 
 response_rate(dataset$Depression_interference)
 boxplot(dataset$Depression_interference)
+std(dataset$Depression_interference)
 
 # Level of anxiety 
 # 5-9 = mild anxiety; 
@@ -36,12 +44,13 @@ boxplot(dataset$Depression_interference)
 mean(dataset$Anxiety_total, na.rm=TRUE) 
 response_rate(dataset$Anxiety_total)
 boxplot(dataset$Anxiety_total)
+std(dataset$Anxiety_total)
 
 # Level of impairment from anxiety (scale: 0-6)
 mean(dataset$Anxiety_interference, na.rm=TRUE) 
 response_rate(dataset$Anxiety_interference)
 boxplot(dataset$Anxiety_interference)
-
+std(dataset$Anxiety_interference)
 
 
 

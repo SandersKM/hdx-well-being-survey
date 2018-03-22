@@ -265,14 +265,14 @@ flourishing_percent <- flourishing_count/rownum
 # > 20 = severe major depression
 Depression_total_mean <- mean(dataset$Depression_total, na.rm=TRUE) 
 Depression_total_var <- var(dataset$Depression_total,na.rm = TRUE)
-Depression_total_std <- sqrt(Depression_total_var)
+Depression_total_std <- std(dataset$Depression_total)
 Depression_total_rr <- response_rate(dataset$Depression_total)
 Depression_total_box <- boxplot(dataset$Depression_total)
 
 # Level of impairment from depression (scale: 0-6)
 Depression_interference_mean <- mean(dataset$Depression_interference, na.rm=TRUE) 
 Depression_interference_var <- var(dataset$Depression_interference, na.rm=TRUE)
-Depression_interference_std <- sqrt(Depression_interference_var)
+Depression_interference_std <- std(dataset$Depression_interference)
 Depression_interference_rr <- response_rate(dataset$Depression_interference)
 Depression_interference_box <- boxplot(dataset$Depression_interference)
 
@@ -282,14 +282,14 @@ Depression_interference_box <- boxplot(dataset$Depression_interference)
 # 15-21 = severe anxiety
 Anxiety_total_mean <- mean(dataset$Anxiety_total, na.rm=TRUE) 
 Anxiety_total_var <- var(dataset$Anxiety_total,na.rm = TRUE)
-Anxiety_total_std <- sqrt(Anxiety_total_var)
+Anxiety_total_std <- std(dataset$Anxiety_total)
 Anxiety_total_rr <- response_rate(dataset$Anxiety_total)
 Anxiety_total_box <- boxplot(dataset$Anxiety_total)
 
 # Level of impairment from anxiety (scale: 0-6)
 Anxiety_interference_mean <- mean(dataset$Anxiety_interference, na.rm=TRUE) 
 Anxiety_interference_var <- var(dataset$Anxiety_interference, na.rm = TRUE)
-Anxiety_interference_std <- sqrt(Anxiety_interference_var)
+Anxiety_interference_std <- std(dataset$Anxiety_interference)
 Anxiety_interference_rr <- response_rate(dataset$Anxiety_interference)
 Anxiety_interference_box <- boxplot(dataset$Anxiety_interference)
 
