@@ -201,3 +201,10 @@ Coping_top_5 <- Coping_all_sorted[order(Coping_all_sorted, decreasing = TRUE)[1:
 #percentage of people who meditate:
 Coping_meditateyoga_freq
 
+# To what extent do you think you have been doing a good job of managing your 
+# stress level over the past month? Scale (0-6)
+mean(dataset$Managing_stress, na.rm=TRUE) 
+Managing_stress_var <- var(dataset$Managing_stress, na.rm = TRUE)
+sqrt(Managing_stress_var)
+response_rate(dataset$Managing_stress)
+boxplot(dataset$Managing_stress)
