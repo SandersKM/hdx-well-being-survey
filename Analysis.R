@@ -938,3 +938,7 @@ Overall_stress_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Ove
 #################################################################################
 # 
 #################################################################################
+
+
+#Export the dataframe to a CSV:
+write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis.txt", sep=",")
