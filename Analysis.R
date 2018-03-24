@@ -49,11 +49,18 @@ Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
 Overall_MH_R_std <- std(dataset$Overall_MH_R)
 Overall_MH_R_rr <- response_rate(dataset$Overall_MH_R)
 
+analysis <- data.frame("Name"="Overall_MH_R","Mean"=Overall_MH_R_mean, 
+                       "Std" = Overall_MH_R_std, "Response Rate"= Overall_MH_R_rr,
+                       stringsAsFactors = FALSE)
+
 #“I see myself as a person with mental illness” (scale:1-6)
 MI_identity_R_mean <- mean(dataset$MI_identity_R, na.rm=TRUE) 
 MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
 MI_identity_R_std <- std(dataset$MI_identity_R)
 MI_identity_R_rr <- response_rate(dataset$MI_identity_R)
+
+analysis <- rbind(analysis, list("MI_identity_R", MI_identity_R_mean,
+                                 MI_identity_R_std, MI_identity_R_rr))
 
 #overall physical health (scale: 1-5)
 Overall_PH_R_mean <- mean(dataset$Overall_PH_R, na.rm=TRUE) 
@@ -61,11 +68,17 @@ Overall_PH_R_var <- var(dataset$Overall_PH_R, na.rm = TRUE)
 Overall_PH_R_std <- sqrt(Overall_PH_R_var)
 Overall_PH_R_rr <- response_rate(dataset$Overall_PH_R)
 
+analysis <- rbind(analysis, list("Overall_PH_R", Overall_PH_R_mean, 
+                                 Overall_PH_R_std, Overall_PH_R_rr))
+
 #overall stress (scale: 1-10)
 Overall_stress_mean <- mean(dataset$Overall_stress, na.rm=TRUE) 
 Overall_stress_var <- var(dataset$Overall_stress, na.rm = TRUE)
 Overall_stress_std <- sqrt(Overall_stress_var)
 Overall_stress_rr <- response_rate(dataset$Overall_stress)
+
+analysis <- rbind(analysis, list("Overall_stress", Overall_stress_mean, 
+                                 Overall_stress_std, Overall_stress_rr))
 
 outlierReplace = function(dataframe, cols, rows, newValue = NA) {
   if (any(rows)) {
@@ -81,6 +94,9 @@ Hours_exercising_box <- boxplot(dataset$Hours_exercising) #Boxplot with outliers
 Hours_exercising_rr <- response_rate(dataset$Hours_exercising)
 Hours_exercising_summary <- summary(dataset$Hours_exercising)
 
+analysis <- rbind(analysis, list("Hours_exercising", Hours_exercising_mean, 
+                                 Hours_exercising_std, Hours_exercising_rr))
+
 #excluded values above 60 for hours of exercise per week
 no_extreme_outliers <- outlierReplace(dataset, "Hours_exercising",
                                       which(dataset$Hours_exercising > 60), NA)
@@ -92,6 +108,9 @@ Hours_exercising_no_extreme_outliers_box <- boxplot(Hours_exercising_no_extreme_
 Hours_exercising_no_extreme_outliers_rr <- response_rate(Hours_exercising_no_extreme_outliers)
 Hours_exercising_no_extreme_outliers_summary <- summary(Hours_exercising_no_extreme_outliers) #min, max, median, quartiles
 
+analysis <- rbind(analysis, list("Hours_exercising_no_extreme_outliers", Hours_exercising_no_extreme_outliers_mean, 
+                                 Hours_exercising_no_extreme_outliers_std, Hours_exercising_no_extreme_outliers_rr))
+
 # typical hours of sleep per night (open-ended)
 Hours_sleep_summary <- summary(dataset$Hours_sleep)
 Hours_sleep_mean <- mean(dataset$Hours_sleep, na.rm=TRUE) 
@@ -99,6 +118,8 @@ Hours_sleep_var <- var(dataset$Hours_sleep, na.rm = TRUE)
 Hours_sleep_std <- sqrt(Hours_sleep_var)
 Hours_sleep_rr <- response_rate(dataset$Hours_sleep)
 
+analysis <- rbind(analysis, list("Hours_sleep", Hours_sleep_mean, 
+                                 Hours_sleep_std, Hours_sleep_rr))
 #how respondents feel the campus environment at Hendrix 
 #impacts students’ mental health (scale: -3 to +3)
 HDX_MH_impact_mean <- mean(dataset$HDX_MH_impact, na.rm=TRUE) 
@@ -107,6 +128,8 @@ HDX_MH_impact_std <- sqrt(HDX_MH_impact_var)
 HDX_MH_impact_rr <- response_rate(dataset$HDX_MH_impact)
 HDX_MH_impact_box <- boxplot(dataset$HDX_MH_impact) #the responses here are very symetrical 
 
+analysis <- rbind(analysis, list("HDX_MH_impact", HDX_MH_impact_mean, 
+                                 HDX_MH_impact_std, HDX_MH_impact_rr))
 #################################################################################
 # Positive mental health
 #################################################################################
@@ -118,6 +141,9 @@ MHCSF_total_std <- std(dataset$MHCSF_total)
 MHCSF_total_rr <- response_rate(dataset$MHCSF_total)
 MHCSF_total_box <- boxplot(dataset$MHCSF_total)
 
+analysis <- rbind(analysis, list("MHCSF_total", MHCSF_total_mean, 
+                                 MHCSF_total_std, MHCSF_total_rr))
+
 #Level of positive emotions (scale 0-4)
 PE_avg_mean <- mean(dataset$PE_avg, na.rm=TRUE) 
 PE_avg_var <- var(dataset$PE_avg, na.rm = TRUE)
@@ -125,12 +151,19 @@ PE_avg_std <- std(dataset$PE_avg)
 PE_avg_rr <- response_rate(dataset$PE_avg)
 PE_avg_box <- boxplot(dataset$PE_avg)
 
+analysis <- rbind(analysis, list("PE_avg", PE_avg_mean, 
+                                 PE_avg_std, PE_avg_rr))
+
 # Level of resilience (scale 1-5)
 Resilience_avg_mean <- mean(dataset$Resilience_avg, na.rm=TRUE) 
 Resilience_avg_var <- var(dataset$Resilience_avg, na.rm = TRUE)
 Resilience_avg_std <- std(dataset$Resilience_avg)
 Resilience_avg_rr <- response_rate(dataset$Resilience_avg)
 Resilience_avg_box <- boxplot(dataset$Resilience_avg)
+
+analysis <- rbind(analysis, list("Resilience_avg", Resilience_avg_mean, 
+                                 Resilience_avg_std, Resilience_avg_rr))
+
 
 # Level of satisfaction with personal 
 #relationships at HDX (scale 1-5)
@@ -140,12 +173,20 @@ Relationship_satis_std <- std(dataset$Relationship_satis)
 Relationship_satis_rr <- response_rate(dataset$Relationship_satis)
 Relationship_satis_box <- boxplot(dataset$Relationship_satis)
 
+analysis <- rbind(analysis, list("Relationship_satis", Relationship_satis_mean, 
+                                 Relationship_satis_std, Relationship_satis_rr))
+
+
 # Level of belongingness (scale 9-54)
 Belonging_total_mean <- mean(dataset$Belonging_total, na.rm=TRUE) 
 Belonging_total_var <- var(dataset$Belonging_total, na.rm = TRUE)
 Belonging_total_std <- std(dataset$Belonging_total)
 Belonging_total_rr <- response_rate(dataset$Belonging_total)
 Belonging_total_box <- boxplot(dataset$Belonging_total)
+
+analysis <- rbind(analysis, list("Belonging_total", Belonging_total_mean, 
+                                 Belonging_total_std, Belonging_total_rr))
+
 
 ######
 #respondents who are considered “flourishing” 
@@ -269,12 +310,20 @@ Depression_total_std <- std(dataset$Depression_total)
 Depression_total_rr <- response_rate(dataset$Depression_total)
 Depression_total_box <- boxplot(dataset$Depression_total)
 
+analysis <- rbind(analysis, list("Depression_total", Depression_total_mean, 
+                                 Depression_total_std, Depression_total_rr))
+
+
 # Level of impairment from depression (scale: 0-6)
 Depression_interference_mean <- mean(dataset$Depression_interference, na.rm=TRUE) 
 Depression_interference_var <- var(dataset$Depression_interference, na.rm=TRUE)
 Depression_interference_std <- std(dataset$Depression_interference)
 Depression_interference_rr <- response_rate(dataset$Depression_interference)
 Depression_interference_box <- boxplot(dataset$Depression_interference)
+
+analysis <- rbind(analysis, list("Depression_interference", Depression_interference_mean, 
+                                 Depression_interference_std, Depression_interference_rr))
+
 
 # Level of anxiety 
 # 5-9 = mild anxiety; 
@@ -286,12 +335,20 @@ Anxiety_total_std <- std(dataset$Anxiety_total)
 Anxiety_total_rr <- response_rate(dataset$Anxiety_total)
 Anxiety_total_box <- boxplot(dataset$Anxiety_total)
 
+analysis <- rbind(analysis, list("Anxiety_total", Anxiety_total_mean, 
+                                 Anxiety_total_std, Anxiety_total_rr))
+
+
 # Level of impairment from anxiety (scale: 0-6)
 Anxiety_interference_mean <- mean(dataset$Anxiety_interference, na.rm=TRUE) 
 Anxiety_interference_var <- var(dataset$Anxiety_interference, na.rm = TRUE)
 Anxiety_interference_std <- std(dataset$Anxiety_interference)
 Anxiety_interference_rr <- response_rate(dataset$Anxiety_interference)
 Anxiety_interference_box <- boxplot(dataset$Anxiety_interference)
+
+analysis <- rbind(analysis, list("Anxiety_interference", Anxiety_interference_mean, 
+                                 Anxiety_interference_std, Anxiety_interference_rr))
+
 
 #################################################################################
 # Non-suicidal self-injury and eating behavior
@@ -309,6 +366,10 @@ ED_total_var <- var(dataset$ED_total, na.rm = TRUE)
 ED_total_std <- sqrt(ED_total_var)
 ED_total_rr <- response_rate(dataset$ED_total)
 
+analysis <- rbind(analysis, list("ED_total", ED_total_mean, 
+                                 ED_total_std, ED_total_rr))
+
+
 #################################################################################
 # Stress
 #################################################################################
@@ -319,14 +380,22 @@ Overall_stress_var <-var(dataset$Overall_stress, na.rm = TRUE)
 Overall_stress_std <- sqrt(Overall_stress_var)
 Overall_stress_rr <- response_rate(dataset$Overall_stress)
 
+analysis <- rbind(analysis, list("Overall_stress", Overall_stress_mean, 
+                                 Overall_stress_std, Overall_stress_rr))
+
+
 # Percieved Stress Scale
 # 0-13: Low Stress
 # 14-26: Moderate Stress
 # 27-40: High Stress
-Stress_total_total <- mean(dataset$Stress_total, na.rm=TRUE) 
+Stress_total_mean <- mean(dataset$Stress_total, na.rm=TRUE) 
 Stress_total_var <- var(dataset$Stress_total, na.rm = TRUE)
 Stress_total_std <- sqrt(Stress_total_var)
 Stress_total_rr <- response_rate(dataset$Stress_total)
+
+analysis <- rbind(analysis, list("Stress_total", Stress_total_mean, 
+                                 Stress_total_std, Stress_total_rr))
+
 
 # Function for getting frequency of how many people checked each stressor
 # Erase "rownum" from return if you just want counts and not freqency.
@@ -414,10 +483,48 @@ stressor_barplot_top_5 <-  barplot(stressor_values_vertex_top_5,
 
 
 # Beliefs about how stress affects people's health
-Stress_and_health_mean <- mean(dataset$Stress_and_health, na.rm=TRUE) 
+# -4 = Bad, 4 = Good
+mean(dataset$Stress_and_health, na.rm=TRUE) 
 Stress_and_health_var <- var(dataset$Stress_and_health, na.rm = TRUE)
-Stress_and_health_std <- sqrt(Stress_and_health_var)
-Stress_and_health_rr <- response_rate(dataset$Stress_and_health)
+sqrt(Stress_and_health_var)
+response_rate(dataset$Stress_and_health)
+boxplot(dataset$Stress_and_health)
+
+analysis <- rbind(analysis, list("Stress_and_health", Stress_and_health_mean, 
+                                 Stress_and_health_std, Stress_and_health_rr))
+
+# To what extent do you think stress negatively affects your personal happiness
+# Scale (0-6)
+Stress_and_happiness_mean <- mean(dataset$Stress_and_happiness, na.rm=TRUE) 
+Stress_and_happiness_var <- var(dataset$Stress_and_happiness, na.rm = TRUE)
+Stress_and_happiness_std <- sqrt(Stress_and_happiness_var)
+Stress_and_happiness_rr <- response_rate(dataset$Stress_and_happiness)
+Stress_and_happiness_box <- boxplot(dataset$Stress_and_happiness)
+
+analysis <- rbind(analysis, list("Stress_and_happiness", Stress_and_happiness_mean, 
+                                 Stress_and_happiness_std, Stress_and_happiness_rr))
+
+# To what extent do you think stress negatively affects your personal Mental Health
+# Scale (0-6)
+Stress_and_MH_mean <- mean(dataset$Stress_and_MH, na.rm=TRUE) 
+Stress_and_MH_var <- var(dataset$Stress_and_MH, na.rm = TRUE)
+Stress_and_MH_std <- sqrt(Stress_and_MH_var)
+Stress_and_MH_rr <- response_rate(dataset$Stress_and_MH)
+Stress_and_MH_box <- boxplot(dataset$Stress_and_MH)
+
+analysis <- rbind(analysis, list("Stress_and_MH", Stress_and_MH_mean, 
+                                 Stress_and_MH_std, Stress_and_MH_rr))
+
+# To what extent do you think stress negatively affects your personal Physical Health
+# Scale (0-6)
+Stress_and_PH_mean <- mean(dataset$Stress_and_PH, na.rm=TRUE) 
+Stress_and_PH_var <- var(dataset$Stress_and_PH, na.rm = TRUE)
+Stress_and_PH_std <- sqrt(Stress_and_PH_var)
+Stress_and_PH_rr <- response_rate(dataset$Stress_and_PH)
+Stress_and_PH_box <- boxplot(dataset$Stress_and_PH)
+
+analysis <- rbind(analysis, list("Stress_and_PH", Stress_and_PH_mean, 
+                                 Stress_and_PH_std, Stress_and_PH_rr))
 
 #Looking at Correlations and Covariances 
 # using Pearson's Method and casewise deletions for missing data
@@ -445,6 +552,58 @@ cov_overall_stress_overall_PE_avg <- cov(dataset$Overall_stress, dataset$PE_avg,
 # Coping with Stress
 #################################################################################
 
+Coping_relspirit_freq <- freq_bool(dataset$Coping_relspirit)
+Coping_Tvmovies_freq <- freq_bool(dataset$Coping_Tvmovies)
+Coping_internet_freq <- freq_bool(dataset$Coping_internet)
+Coping_read_freq <- freq_bool(dataset$Coping_read)
+Coping_friendsfamily_freq <- freq_bool(dataset$Coping_friendsfamily)
+Coping_outdoors_freq <- freq_bool(dataset$Coping_outdoors)
+Coping_sleep_freq <- freq_bool(dataset$Coping_sleep)
+Coping_hobby_freq <- freq_bool(dataset$Coping_hobby)
+Coping_caffeine_freq <- freq_bool(dataset$Coping_caffeine)
+Coping_cigarettes_freq <- freq_bool(dataset$Coping_cigarettes)
+Coping_marijuana_freq <- freq_bool(dataset$Coping_marijuana)
+Coping_illegaldrugs_freq <- freq_bool(dataset$Coping_illegaldrugs)
+Coping_food_freq <- freq_bool(dataset$Coping_food)
+Coping_videogames_freq <- freq_bool(dataset$Coping_videogames)
+Coping_sports_freq <- freq_bool(dataset$Coping_sports)
+#percentage of people who meditate:
+Coping_meditateyoga_freq <- freq_bool(dataset$Coping_meditateyoga)
+Coping_Mhprofessional_freq <- freq_bool(dataset$Coping_Mhprofessional)
+Coping_writing_freq <- freq_bool(dataset$Coping_writing)
+Coping_planning_freq <- freq_bool(dataset$Coping_planning)
+Coping_talking_freq <- freq_bool(dataset$Coping_talking)
+Coping_other_freq <- freq_bool(dataset$Coping_other)
+Coping_exercise_freq <- freq_bool(dataset$Coping_exercise)
+Coping_music_freq <- freq_bool(dataset$Coping_music)
+Coping_alcohol_freq <- freq_bool(dataset$Coping_alcohol)
+Coping_medication_freq <- freq_bool(dataset$Coping_medication)
+
+Coping_all <- data.frame(Coping_Tvmovies_freq,Coping_internet_freq,Coping_read_freq,
+                         Coping_friendsfamily_freq,Coping_outdoors_freq, Coping_sleep_freq,
+                         Coping_hobby_freq,Coping_caffeine_freq,Coping_cigarettes_freq,
+                         Coping_marijuana_freq, Coping_illegaldrugs_freq,
+                         Coping_food_freq,Coping_videogames_freq,Coping_sports_freq,
+                         Coping_meditateyoga_freq,Coping_Mhprofessional_freq,
+                         Coping_writing_freq,Coping_planning_freq,Coping_talking_freq,
+                         Coping_other_freq,Coping_exercise_freq,Coping_music_freq,
+                         Coping_alcohol_freq,Coping_medication_freq,Coping_relspirit_freq)
+
+Coping_all_sorted <- sort(Coping_all, decreasing = TRUE)
+Coping_top_5 <- Coping_all_sorted[order(Coping_all_sorted, decreasing = TRUE)[1:5]]
+
+
+# To what extent do you think you have been doing a good job of managing your 
+# stress level over the past month? Scale (0-6)
+Managing_stress_mean <- mean(dataset$Managing_stress, na.rm=TRUE) 
+Managing_stress_var <- var(dataset$Managing_stress, na.rm = TRUE)
+Managing_stress_std <- sqrt(Managing_stress_var)
+Managing_stress_rr <- response_rate(dataset$Managing_stress)
+Managing_stress_box <- boxplot(dataset$Managing_stress)
+
+analysis <- rbind(analysis, list("Managing_stress", Managing_stress_mean, 
+                                 Managing_stress_std, Managing_stress_rr))
+
 #################################################################################
 # Sleep
 #################################################################################
@@ -457,6 +616,10 @@ Hours_sleep_var <- var(dataset$Hours_sleep, na.rm = TRUE)
 Hours_sleep_std <- sqrt(Hours_sleep_var)
 Hours_sleep_rr <- response_rate(dataset$Hours_sleep)
 
+analysis <- rbind(analysis, list("Hours_sleep", Hours_sleep_mean, 
+                                 Hours_sleep_std, Hours_sleep_rr))
+
+
 #Sleep Quality (Scale: 1=very good - 4=very bad)
 Sleep_quality_min <- min(dataset$Sleep_quality, na.rm=TRUE) #minimum
 Sleep_quality_max <- max(dataset$Sleep_quality, na.rm=TRUE) #maximum
@@ -466,6 +629,10 @@ Sleep_quality_std <- sqrt(Sleep_quality_var)
 Sleep_quality_rr <- response_rate(dataset$Sleep_quality)
 Sleep_quality_box <- boxplot(dataset$Sleep_quality)
 
+analysis <- rbind(analysis, list("Sleep_quality", Sleep_quality_mean, 
+                                 Sleep_quality_std, Sleep_quality_rr))
+
+
 #Sleep Hygiene (Scale: 14=very good - 70=very bad)
 SHI_total_min <- min(dataset$SHI_total, na.rm=TRUE) #minimum
 SHI_total_max <- max(dataset$SHI_total, na.rm=TRUE) #maximum
@@ -474,6 +641,10 @@ SHI_total_var <- var(dataset$SHI_total, na.rm = TRUE)
 SHI_total_std <- sqrt(SHI_total_var)
 SHI_total_rr <- response_rate(dataset$SHI_total)
 SHI_total_box <- boxplot(dataset$SHI_total)
+
+analysis <- rbind(analysis, list("SHI_total", SHI_total_mean, 
+                                 SHI_total_std, SHI_total_rr))
+
 
 # Between total Sleep Hygiene and sleep quality
 cor_SHI_total_Sleep_quality <- cor(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
@@ -510,6 +681,10 @@ Recognize_distress_std <- std(dataset$Recognize_distress)
 Recognize_distress_rr <- response_rate(dataset$Recognize_distress)
 Recognize_distress_box  <- boxplot(dataset$Recognize_distress)
 
+analysis <- rbind(analysis, list("Recognize_distress", Recognize_distress_mean, 
+                                 Recognize_distress_std, Recognize_distress_rr))
+
+
 #I feel confident in helping someone with a mental health problem.
 #(1 = Strongly Agree - 6 = Strongly Disagree)
 Helping_confidence_mean <- mean(dataset$Helping_confidence, na.rm=TRUE) 
@@ -517,6 +692,10 @@ Helping_confidence_var <- var(dataset$Helping_confidence, na.rm = TRUE)
 Helping_confidence_std <- std(dataset$Helping_confidence)
 Helping_confidence_rr <- response_rate(dataset$Helping_confidence)
 Helping_confidence_box <- boxplot(dataset$Helping_confidence)
+
+analysis <- rbind(analysis, list("Helping_confidence", Helping_confidence_mean, 
+                                 Helping_confidence_std, Helping_confidence_rr))
+
 
 #Knowing where to go for mental health help
 #(1 = Strongly Agree - 6 = Strongly Disagree)
@@ -526,6 +705,10 @@ MH_know_where_to_go_std <- std(dataset$MH_know_where_to_go)
 MH_know_where_to_go_rr <- response_rate(dataset$MH_know_where_to_go)
 MH_know_where_to_go_box <- boxplot(dataset$MH_know_where_to_go)
 
+analysis <- rbind(analysis, list("MH_know_where_to_go", MH_know_where_to_go_mean, 
+                                 MH_know_where_to_go_std, MH_know_where_to_go_rr))
+
+
 ##Knowing where to go for physical health help
 #(1 = Strongly Agree - 6 = Strongly Disagree)
 PH_know_where_to_go_mean <- mean(dataset$PH_know_where_to_go, na.rm=TRUE) 
@@ -533,6 +716,10 @@ PH_know_where_to_go_var <- var(dataset$PH_know_where_to_go, na.rm = TRUE)
 PH_know_where_to_go_std <- std(dataset$PH_know_where_to_go)
 PH_know_where_to_go_rr <- response_rate(dataset$PH_know_where_to_go)
 PH_know_where_to_go_box <- boxplot(dataset$PH_know_where_to_go)
+
+analysis <- rbind(analysis, list("PH_know_where_to_go", PH_know_where_to_go_mean, 
+                                 PH_know_where_to_go_std, PH_know_where_to_go_rr))
+
 
 #Percentage of students who have participated in MH training
 MH_training_freq <- freq_bool(na.omit(dataset$MH_training))
@@ -586,12 +773,20 @@ MH_needs_R_std <- std(dataset$MH_needs_R)
 MH_needs_R_rr <- response_rate(dataset$MH_needs_R)
 MH_needs_R_box <- boxplot(dataset$MH_needs_R)
 
+analysis <- rbind(analysis, list("MH_needs_R", MH_needs_R_mean, 
+                                 MH_needs_R_std, MH_needs_R_rr))
+
+
 # In the last year, I felt my MH needs were met (1=stongly disagree - 6 = strongly agree)
 MH_needs_met_R_mean <- mean(dataset$MH_needs_met_R, na.rm=TRUE) 
 MH_needs_met_R_var <-var(dataset$MH_needs_met_R, na.rm = TRUE)
 MH_needs_met_R_std <-std(dataset$MH_needs_met_R)
 MH_needs_met_R_rr <-response_rate(dataset$MH_needs_met_R)
 MH_needs_met_R_box <-boxplot(dataset$MH_needs_met_R)
+
+analysis <- rbind(analysis, list("MH_needs_met_R", MH_needs_met_R_mean, 
+                                 MH_needs_met_R_std, MH_needs_met_R_rr))
+
 
 # factors that have caused respondents to receive fewer mental health 
 # services than they would have liked to receive
@@ -622,12 +817,20 @@ Stigma_total_std <- std(dataset$Stigma_total)
 Stigma_total_rr <- response_rate(dataset$Stigma_total)
 Stigma_total_box <- boxplot(dataset$Stigma_total)
 
+analysis <- rbind(analysis, list("Stigma_total", Stigma_total_mean, 
+                                 Stigma_total_std, Stigma_total_rr))
+
+
 # The extent to which an individual conceals their mental illness (scale: 3-18)
 Concealment_total_mean <- mean(dataset$Concealment_total, na.rm=TRUE) 
 Concealment_total_var <- var(dataset$Concealment_total, na.rm = TRUE)
 Concealment_total_std <- std(dataset$Concealment_total)
 Concealment_total_rr <- response_rate(dataset$Concealment_total)
 Concealment_total_box <- boxplot(dataset$Concealment_total)
+
+analysis <- rbind(analysis, list("Concealment_total", Concealment_total_mean, 
+                                 Concealment_total_std, Concealment_total_rr))
+
 
 #################################################################################
 # MH and Academic Performance
