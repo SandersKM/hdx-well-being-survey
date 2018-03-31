@@ -530,23 +530,33 @@ analysis <- rbind(analysis, list("Stress_and_PH", Stress_and_PH_mean,
 # using Pearson's Method and casewise deletions for missing data
 
 # Between Overall Stress and Overall Mental Health
-cor_overall_stress_overall_MH <- cor(dataset$Overall_stress, dataset$Overall_MH,
+overall_stress_overall_MH_cor <- cor(dataset$Overall_stress, dataset$Overall_MH,
                                      use="complete.obs", method="pearson")
-cov_overall_stress_overall_MH <- cov(dataset$Overall_stress, dataset$Overall_MH, 
+overall_stress_overall_MH_cov <- cov(dataset$Overall_stress, dataset$Overall_MH, 
                                      use="complete.obs", method="pearson")
+
+corcov <- data.frame("Name1"="Overall_stress", "Name2" = "Overall_MH",
+                     "correlation" = overall_stress_overall_MH_cor,
+                     "covariance" = overall_stress_overall_MH_cov,
+                       stringsAsFactors = FALSE)
 
 # Between Overall Stress and Overall Physical Health
-cor_overall_stress_overall_PH <- cor(dataset$Overall_stress, dataset$Overall_PH,
+overall_stress_overall_PH_cor <- cor(dataset$Overall_stress, dataset$Overall_PH,
                                      use="complete.obs", method="pearson")
-cov_overall_stress_overall_PH <- cov(dataset$Overall_stress, dataset$Overall_PH, 
+overall_stress_overall_PH_cov <- cov(dataset$Overall_stress, dataset$Overall_PH, 
                                      use="complete.obs", method="pearson")
+
+corcov <- rbind(corcov, list("Overall_stress", "Overall_PH", 
+                             overall_stress_overall_PH_cor, overall_stress_overall_PH_cov))
+
 
 # Between Overall Stress and Positive Emotions
-cor_overall_stress_overall_PE_avg <- cor(dataset$Overall_stress, dataset$PE_avg,
+overall_stress_overall_PE_avg_cor <- cor(dataset$Overall_stress, dataset$PE_avg,
                                          use="complete.obs", method="pearson")
-cov_overall_stress_overall_PE_avg <- cov(dataset$Overall_stress, dataset$PE_avg, 
+overall_stress_overall_PE_avg_cov <- cov(dataset$Overall_stress, dataset$PE_avg, 
                                          use="complete.obs", method="pearson")
-
+corcov <- rbind(corcov, list("Overall_stress", "PE_avg",
+                             overall_stress_overall_PE_avg_cor,overall_stress_overall_PE_avg_cov ))
 
 #################################################################################
 # Coping with Stress
@@ -649,26 +659,32 @@ analysis <- rbind(analysis, list("SHI_total", SHI_total_mean,
 # Between total Sleep Hygiene and sleep quality
 cor_SHI_total_Sleep_quality <- cor(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_quality <- cov(dataset$SHI_total, dataset$Sleep_quality, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("SHI_total", "Sleep_quality",cor_SHI_total_Sleep_quality ,cov_SHI_total_Sleep_quality ))
 
 # Between total Sleep Hygiene and feeling sleepy during the day
 cor_SHI_total_Sleep_hygiene15 <- cor(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_hygiene15 <- cov(dataset$SHI_total, dataset$Sleep_hygiene15, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("SHI_total", "Sleep_hygiene15", cor_SHI_total_Sleep_hygiene15, cov_SHI_total_Sleep_hygiene15))
 
 # Between total Sleep Hygiene and worry about sleep
 cor_SHI_total_Sleep_hygiene16 <- cor(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_hygiene16 <- cov(dataset$SHI_total, dataset$Sleep_hygiene16, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("SHI_total", "Sleep_hygiene16",cor_SHI_total_Sleep_hygiene16 ,cov_SHI_total_Sleep_hygiene16 ))
 
 # Between total Sleep Hygiene and feeling more moody now than before
 cor_SHI_total_Sleep_hygiene17 <- cor(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_hygiene17 <- cov(dataset$SHI_total, dataset$Sleep_hygiene17, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("SHI_total", "Sleep_hygiene17", cor_SHI_total_Sleep_hygiene17,cov_SHI_total_Sleep_hygiene17 ))
 
 # Between total Sleep Hygiene and feeling like it takes more effort to get things done
 cor_SHI_total_Sleep_hygiene18 <- cor(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_hygiene18 <- cov(dataset$SHI_total, dataset$Sleep_hygiene18, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("SHI_total", "Sleep_hygiene18",cor_SHI_total_Sleep_hygiene18 , cov_SHI_total_Sleep_hygiene18))
 
 # Between total Sleep Hygiene and having more trouble paying attention and thinking than before
 cor_SHI_total_Sleep_hygiene19 <- cor(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
 cov_SHI_total_Sleep_hygiene19 <- cov(dataset$SHI_total, dataset$Sleep_hygiene19, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("SHI_total", "Sleep_hygiene19",cor_SHI_total_Sleep_hygiene19 ,cov_SHI_total_Sleep_hygiene19 ))
 
 #################################################################################
 # General Mental Health Knowledge
@@ -865,74 +881,92 @@ Discrimination_academic_impact_tbl <- table(dataset$Discrimination_academic_impa
 # Between Anxiety and Depression
 Anxiety_total_Depression_total_cor <- cor(dataset$Depression_total, dataset$Anxiety_total, use="complete.obs", method="pearson")
 Anxiety_total_Depression_total_cov <- cov(dataset$Depression_total, dataset$Anxiety_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Depression_total", "Anxiety_total", Anxiety_total_Depression_total_cor,Anxiety_total_Depression_total_cov ))
 
 #Between Hours of Sleep and Depression
 Depression_total_Hours_sleep_cor <- cor(dataset$Depression_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
 Depression_total_Hours_sleep_cov <- cov(dataset$Depression_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_sleep", "Depression_total", Depression_total_Hours_sleep_cor, Depression_total_Hours_sleep_cov))
 
 #Between Hours of Sleep and anxiety
 Anxiety_total_Hours_sleep_cor <- cor(dataset$Anxiety_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
 Anxiety_total_Hours_sleep_cov <- cov(dataset$Anxiety_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_sleep", "Anxiety_total", Anxiety_total_Hours_sleep_cor, Anxiety_total_Hours_sleep_cov))
 
 #Between Hours of Sleep and stress
 Overall_stress_Hours_sleep_cor <- cor(dataset$Overall_stress, dataset$Hours_sleep, use="complete.obs", method="pearson")
 Overall_stress_Hours_sleep_cov <- cov(dataset$Overall_stress, dataset$Hours_sleep, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_sleep", "Overall_stress",Overall_stress_Hours_sleep_cor , Overall_stress_Hours_sleep_cov))
 
 #Between Hours of Sleep and Mental Heath Continuum score
 MHCSF_total_Hours_sleep_cor <- cor(dataset$MHCSF_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
 MHCSF_total_Hours_sleep_cov <- cov(dataset$MHCSF_total, dataset$Hours_sleep, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_sleep", "MHCSF_total",MHCSF_total_Hours_sleep_cor ,MHCSF_total_Hours_sleep_cov ))
 
 #Between Hours of Sleep and Positive Emotion
 PE_avg_Hours_sleep_cor <- cor(dataset$PE_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
 PE_avg_Hours_sleep_cov <- cov(dataset$PE_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_sleep", "PE_avg",PE_avg_Hours_sleep_cor , PE_avg_Hours_sleep_cov))
 
 #Between Hours of Sleep and resilience 
 Resilience_avg_Hours_sleep_cor <- cor(dataset$Resilience_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
 Resilience_avg_Hours_sleep_cov <- cov(dataset$Resilience_avg, dataset$Hours_sleep, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_sleep", "Resilience_avg",Resilience_avg_Hours_sleep_cor , Resilience_avg_Hours_sleep_cov))
 
 #Between Stress and Depression
 Depression_total_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$Depression_total, use="complete.obs", method="pearson")
 Depression_total_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$Depression_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Overall_stress", "Depression_total", Depression_total_Overall_stress_cor, Depression_total_Overall_stress_cov))
 
 #Between Stress and Anxiety
 Anxiety_total_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$Anxiety_total, use="complete.obs", method="pearson")
 Anxiety_total_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$Anxiety_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Overall_stress", "Anxiety_total", Anxiety_total_Overall_stress_cor, Anxiety_total_Overall_stress_cov))
 
 #Between Stress and Mental Health Continuum Score
 MHCSF_total_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$MHCSF_total, use="complete.obs", method="pearson")
 MHCSF_total_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$MHCSF_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Overall_stress", "MHCSF_total", MHCSF_total_Overall_stress_cor, MHCSF_total_Overall_stress_cov))
 
 #Between Stress and Positive Emotion
 PE_avg_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$PE_avg, use="complete.obs", method="pearson")
 PE_avg_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$PE_avg, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Overall_stress", "PE_avg", PE_avg_Overall_stress_cor, PE_avg_Overall_stress_cov))
 
 #Between Stress and Resilience
 Resilience_avg_Overall_stress_cor <- cor(dataset$Overall_stress, dataset$Resilience_avg, use="complete.obs", method="pearson")
 Resilience_avg_Overall_stress_cov <- cov(dataset$Overall_stress, dataset$Resilience_avg, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Overall_stress", "Resilience_avg", Resilience_avg_Overall_stress_cor,Resilience_avg_Overall_stress_cov ))
 
 #Between Screen Time and Depression
 Depression_total_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Depression_total, use="complete.obs", method="pearson")
 Depression_total_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Depression_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_screentime", "Depression_total", Depression_total_Hours_screentime_cor,Depression_total_Hours_screentime_cov))
 
 #Between Screen Time and Anxiety
 Anxiety_total_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Anxiety_total, use="complete.obs", method="pearson")
 Anxiety_total_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Anxiety_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_screentime", "Anxiety_total", Anxiety_total_Hours_screentime_cor, Anxiety_total_Hours_screentime_cov))
 
 #Between Screen Time and Mental Health Continuum Score
 MHCSF_total_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$MHCSF_total, use="complete.obs", method="pearson")
 MHCSF_total_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$MHCSF_total, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_screentime", "MHCSF_total", MHCSF_total_Hours_screentime_cor, MHCSF_total_Hours_screentime_cov))
 
 #Between Screen Time and Positive Emotion
 PE_avg_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$PE_avg, use="complete.obs", method="pearson")
 PE_avg_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$PE_avg, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_screentime", "PE_avg", PE_avg_Hours_screentime_cor, PE_avg_Hours_screentime_cov))
 
 #Between Screen Time and Resilience
 Resilience_avg_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Resilience_avg, use="complete.obs", method="pearson")
 Resilience_avg_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Resilience_avg, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_screentime", "Resilience_avg", Resilience_avg_Hours_screentime_cor, Resilience_avg_Hours_screentime_cov))
 
 #Between Screen Time and Overall Stress
 Overall_stress_Hours_screentime_cor <- cor(dataset$Hours_screentime, dataset$Overall_stress, use="complete.obs", method="pearson")
 Overall_stress_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Overall_stress, use="complete.obs", method="pearson")
+corcov <- rbind(corcov, list("Hours_screentime", "Overall_stress", Overall_stress_Hours_screentime_cor,Overall_stress_Hours_screentime_cov ))
 
 
 #################################################################################
@@ -940,5 +974,6 @@ Overall_stress_Hours_screentime_cov <- cov(dataset$Hours_screentime, dataset$Ove
 #################################################################################
 
 
-#Export the dataframe to a CSV:
+#Export the dataframes to a CSV:
 write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis.txt", sep=",")
+write.table(corcov, "C:/Users/kates/Desktop/HWBS2017_CorCov.txt", sep=",")
