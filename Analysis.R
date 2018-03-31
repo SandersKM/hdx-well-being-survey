@@ -39,15 +39,23 @@ freq_bool <- function(col){
   return(sum(tbl[names(tbl)==1])/sum(tbl))
 }
 
+
 #################################################################################
 # At a glance
 #################################################################################
 
 #overall mental health  (scale:1-5)
+for(n in 1:length(dataset$Overall_MH_R)){
+  if(!is.na(dataset$Overall_MH_R[n]) && dataset$Overall_MH_R[n] > 5){
+    dataset$Overall_MH_R[n] <- NA} #This gets rid of the 6s in the data...
+}
 Overall_MH_R_mean <- mean(dataset$Overall_MH_R, na.rm=TRUE)
 Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
 Overall_MH_R_std <- std(dataset$Overall_MH_R)
 Overall_MH_R_rr <- response_rate(dataset$Overall_MH_R)
+Overall_MH_R_hist <- hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
+     freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
+     main="Overall Mental Health")
 
 analysis <- data.frame("Name"="Overall_MH_R","Mean"=Overall_MH_R_mean, 
                        "Std" = Overall_MH_R_std, "Response Rate"= Overall_MH_R_rr,
@@ -58,15 +66,27 @@ MI_identity_R_mean <- mean(dataset$MI_identity_R, na.rm=TRUE)
 MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
 MI_identity_R_std <- std(dataset$MI_identity_R)
 MI_identity_R_rr <- response_rate(dataset$MI_identity_R)
+MI_identity_R_hist<- hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5,6), 
+     xlab="I see myself as a person with mental illness.",
+     freq = FALSE, labels = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
+                              "Somewhat Agree", "Agree", "Strongly Agree"), 
+     main="Mental Illness Identity")
 
 analysis <- rbind(analysis, list("MI_identity_R", MI_identity_R_mean,
                                  MI_identity_R_std, MI_identity_R_rr))
 
 #overall physical health (scale: 1-5)
+for(n in 1:length(dataset$Overall_PH_R)){
+  if(!is.na(dataset$Overall_PH_R[n]) && dataset$Overall_PH_R[n] > 5){
+    dataset$Overall_PH_R[n] <- NA} #This gets rid of the 6s in the data...
+}
 Overall_PH_R_mean <- mean(dataset$Overall_PH_R, na.rm=TRUE) 
 Overall_PH_R_var <- var(dataset$Overall_PH_R, na.rm = TRUE)
 Overall_PH_R_std <- sqrt(Overall_PH_R_var)
 Overall_PH_R_rr <- response_rate(dataset$Overall_PH_R)
+Overall_PH_R_hist <- hist(na.omit(dataset$Overall_PH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
+                          freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
+                          main="Overall Physical Health")
 
 analysis <- rbind(analysis, list("Overall_PH_R", Overall_PH_R_mean, 
                                  Overall_PH_R_std, Overall_PH_R_rr))
@@ -76,6 +96,10 @@ Overall_stress_mean <- mean(dataset$Overall_stress, na.rm=TRUE)
 Overall_stress_var <- var(dataset$Overall_stress, na.rm = TRUE)
 Overall_stress_std <- sqrt(Overall_stress_var)
 Overall_stress_rr <- response_rate(dataset$Overall_stress)
+Overall_stress_hist <- hist(na.omit(dataset$Overall_stress), breaks = c(0,1,2,3,4,5,6,7,8,9,10), xlab="Average Stress Level in the Past Month",
+     freq = FALSE, labels = c("No Stress","","","","","","","","","Extreme Stress"), 
+     main="Overall Stress")
+
 
 analysis <- rbind(analysis, list("Overall_stress", Overall_stress_mean, 
                                  Overall_stress_std, Overall_stress_rr))
@@ -127,6 +151,10 @@ HDX_MH_impact_var <- var(dataset$HDX_MH_impact, na.rm = TRUE)
 HDX_MH_impact_std <- sqrt(HDX_MH_impact_var)
 HDX_MH_impact_rr <- response_rate(dataset$HDX_MH_impact)
 HDX_MH_impact_box <- boxplot(dataset$HDX_MH_impact) #the responses here are very symetrical 
+HDX_MH_impact_hist <- hist(na.omit(dataset$HDX_MH_impact), breaks = c(-4,-3, -2, -1, 0, 1, 2, 3), 
+                     xlab="Campus Environment Impact on Mental and Emotional Health",
+                     freq = FALSE, labels = c("Very Negatively","","","","","","Very Positively"), 
+                     main="Hendrix Impact on Student Mental Health")
 
 analysis <- rbind(analysis, list("HDX_MH_impact", HDX_MH_impact_mean, 
                                  HDX_MH_impact_std, HDX_MH_impact_rr))
@@ -172,6 +200,10 @@ Relationship_satis_var <- var(dataset$Relationship_satis, na.rm = TRUE)
 Relationship_satis_std <- std(dataset$Relationship_satis)
 Relationship_satis_rr <- response_rate(dataset$Relationship_satis)
 Relationship_satis_box <- boxplot(dataset$Relationship_satis)
+Relationship_satis_hist<- hist(na.omit(dataset$Relationship_satis), breaks = c(0,1,2,3,4,5), 
+     xlab="Satisfaction with Relationships with People at Hendrix",
+     freq = FALSE, labels = c("Strongly Disagree","","","", "Strongly Agree"), 
+     main="Relationship Satisfaction")
 
 analysis <- rbind(analysis, list("Relationship_satis", Relationship_satis_mean, 
                                  Relationship_satis_std, Relationship_satis_rr))
@@ -320,6 +352,10 @@ Depression_interference_var <- var(dataset$Depression_interference, na.rm=TRUE)
 Depression_interference_std <- std(dataset$Depression_interference)
 Depression_interference_rr <- response_rate(dataset$Depression_interference)
 Depression_interference_box <- boxplot(dataset$Depression_interference)
+Depression_interference_hist <- hist(na.omit(dataset$Depression_interference), breaks = c(-1,0,1,2,3,4,5,6), 
+      xlab="Difficulty Working and Socializing due to Depression",
+      freq = FALSE, labels = c("Not Difficult","","","","","", "Very Difficult"), 
+      main="Depression Interference")
 
 analysis <- rbind(analysis, list("Depression_interference", Depression_interference_mean, 
                                  Depression_interference_std, Depression_interference_rr))
@@ -345,6 +381,10 @@ Anxiety_interference_var <- var(dataset$Anxiety_interference, na.rm = TRUE)
 Anxiety_interference_std <- std(dataset$Anxiety_interference)
 Anxiety_interference_rr <- response_rate(dataset$Anxiety_interference)
 Anxiety_interference_box <- boxplot(dataset$Anxiety_interference)
+Anxiety_interference_hist <- hist(na.omit(dataset$Anxiety_interference), breaks = c(-1,0,1,2,3,4,5,6), 
+     xlab="Difficulty Working and Socializing due to Anxiety",
+     freq = FALSE, labels = c("Not Difficult","","","","","", "Very Difficult"), 
+     main="Anxiety Interference")
 
 analysis <- rbind(analysis, list("Anxiety_interference", Anxiety_interference_mean, 
                                  Anxiety_interference_std, Anxiety_interference_rr))
@@ -365,6 +405,11 @@ ED_total_mean <- mean(dataset$ED_total, na.rm=TRUE)
 ED_total_var <- var(dataset$ED_total, na.rm = TRUE)
 ED_total_std <- sqrt(ED_total_var)
 ED_total_rr <- response_rate(dataset$ED_total)
+ED_total_hist <- hist(na.omit(dataset$ED_total), breaks = c(-1,5, 10, 15, 20, 25, 30, 35, 40, 45), 
+                      xlab="Eating Behaviour Impariment Level",
+                      freq = FALSE, labels = c("","","","At Risk","","","","","",""), 
+                      main="Eating Disorder")
+
 
 analysis <- rbind(analysis, list("ED_total", ED_total_mean, 
                                  ED_total_std, ED_total_rr))
@@ -973,7 +1018,7 @@ corcov <- rbind(corcov, list("Hours_screentime", "Overall_stress", Overall_stres
 # 
 #################################################################################
 
-
+#Be aware that the headers will be shifted over one if you open in Excel
 #Export the dataframes to a CSV:
 write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis.txt", sep=",")
 write.table(corcov, "C:/Users/kates/Desktop/HWBS2017_CorCov.txt", sep=",")

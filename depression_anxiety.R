@@ -36,6 +36,10 @@ mean(dataset$Depression_interference, na.rm=TRUE)
 response_rate(dataset$Depression_interference)
 boxplot(dataset$Depression_interference)
 std(dataset$Depression_interference)
+hist(na.omit(dataset$Depression_interference), breaks = c(-1,0,1,2,3,4,5,6), 
+     xlab="Difficulty Working and Socializing due to Depression",
+     freq = FALSE, labels = c("Not Difficult","","","","","", "Very Difficult"), 
+     main="Depression Interference")
 
 # Level of anxiety 
 # 5-9 = mild anxiety; 
@@ -51,7 +55,10 @@ mean(dataset$Anxiety_interference, na.rm=TRUE)
 response_rate(dataset$Anxiety_interference)
 boxplot(dataset$Anxiety_interference)
 std(dataset$Anxiety_interference)
-
+hist(na.omit(dataset$Anxiety_interference), breaks = c(-1,0,1,2,3,4,5,6), 
+     xlab="Difficulty Working and Socializing due to Anxiety",
+     freq = FALSE, labels = c("Not Difficult","","","","","", "Very Difficult"), 
+     main="Anxiety Interference")
 
 
 

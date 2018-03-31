@@ -43,6 +43,10 @@ mean(dataset$Relationship_satis, na.rm=TRUE)
 response_rate(dataset$Relationship_satis)
 boxplot(dataset$Relationship_satis)
 std(dataset$Relationship_satis)
+hist(na.omit(dataset$Relationship_satis), breaks = c(0,1,2,3,4,5), 
+     xlab="Satisfaction with Relationships with People at Hendrix",
+     freq = FALSE, labels = c("Strongly Disagree","","","", "Strongly Agree"), 
+     main="Relationship Satisfaction")
 
 # Level of belongingness (scale 9-54)
 mean(dataset$Belonging_total, na.rm=TRUE) 

@@ -40,7 +40,9 @@ std(dataset$Alcohol_use)
 response_rate(dataset$Alcohol_use)
 boxplot(dataset$Alcohol_use)
 #histogram of how often respondents drink
-hist(dataset$Alcohol_use, breaks = c(0,1,2,3,4,5), xlab="Alcohol Use")
+hist(dataset$Alcohol_use, breaks = c(0,1,2,3,4,5), xlab="Drinks in the Past Month",
+     freq = FALSE, labels = c("Never", "Once", "2-4 Times Total", "2-3 Times Per Week", 
+                              "> 4 Times Per Week"), main="Alcohol Use")
 
 #Drinking score 
 mean(dataset$Drinking, na.rm=TRUE) 

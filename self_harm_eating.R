@@ -23,4 +23,8 @@ sum(NSSI_total_tbl[names(NSSI_total_tbl)>0])/sum(NSSI_total_tbl)
 # (scale:0-45) >16 = At Risk
 mean(dataset$ED_total, na.rm=TRUE) 
 response_rate(dataset$ED_total)
+hist(na.omit(dataset$ED_total), breaks = c(-1,5, 10, 15, 20, 25, 30, 35, 40, 45), 
+     xlab="Eating Behaviour Impariment Level",
+     freq = FALSE, labels = c("","","","At Risk","","","","","",""), 
+     main="Eating Disorder")
 

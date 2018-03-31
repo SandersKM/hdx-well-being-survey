@@ -10,27 +10,49 @@ response_rate <- function(col){
   return(rr)
 }
 
+
 #################################################################################
 # At a glance
 #################################################################################
 
+
+
 #overall mental health  (scale:1-5)
+for(n in 1:length(dataset$Overall_MH_R)){
+  if(!is.na(dataset$Overall_MH_R[n]) && dataset$Overall_MH_R[n] > 5){
+    dataset$Overall_MH_R[n] <- NA} #This gets rid of the 6s in the data...
+}
 mean(dataset$Overall_MH_R, na.rm=TRUE) 
 response_rate(dataset$Overall_MH_R)
 Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
 sqrt(Overall_MH_R_var) #Standard Deviation
+hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
+     freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
+     main="Overall Mental Health")
 
 #“I see myself as a person with mental illness” (scale:1-6)
 mean(dataset$MI_identity_R, na.rm=TRUE) 
 response_rate(dataset$MI_identity_R)
 MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
 sqrt(MI_identity_R_var)#Standard Deviation
+hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5,6), 
+     xlab="I see myself as a person with mental illness.",
+     freq = FALSE, labels = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
+     "Somewhat Agree", "Agree", "Strongly Agree"), 
+     main="Mental Illness Identity")
 
 #overall physical health (scale: 1-5)
+for(n in 1:length(dataset$Overall_PH_R)){
+  if(!is.na(dataset$Overall_PH_R[n]) && dataset$Overall_PH_R[n] > 5){
+    dataset$Overall_PH_R[n] <- NA} #This gets rid of the 6s in the data...
+}
 mean(dataset$Overall_PH_R, na.rm=TRUE) 
 response_rate(dataset$Overall_PH_R)
 Overall_PH_R_var <- var(dataset$Overall_PH_R, na.rm = TRUE)
 sqrt(Overall_PH_R_var)#Standard Deviation
+hist(na.omit(dataset$Overall_PH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
+     freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
+     main="Overall Physical Health")
 
 #overall stress (scale: 1-10)
 mean(dataset$Overall_stress, na.rm=TRUE) 
@@ -39,6 +61,9 @@ Overall_stress_var <- var(dataset$Overall_stress, na.rm = TRUE)
 sqrt(Overall_stress_var)#Standard Deviation
 boxplot(dataset$Overall_stress) #Having less low stress is an outlier.
 median(dataset$Overall_stress, na.rm = TRUE)
+hist(na.omit(dataset$Overall_stress), breaks = c(0,1,2,3,4,5,6,7,8,9,10), xlab="Average Stress Level in the Past Month",
+     freq = FALSE, labels = c("No Stress","","","","","","","","","Extreme Stress"), 
+     main="Overall Stress")
 
 #hours per week exercising (open-ended)
 min(dataset$Hours_exercising, na.rm=TRUE) #minimum
@@ -84,3 +109,7 @@ response_rate(dataset$HDX_MH_impact)
 boxplot(dataset$HDX_MH_impact) #the responses here are very symetrical 
 HDX_MH_impact_var <- var(dataset$HDX_MH_impact, na.rm = TRUE)
 sqrt(HDX_MH_impact_var)#Standard Deviation
+hist(na.omit(dataset$HDX_MH_impact), breaks = c(-4,-3, -2, -1, 0, 1, 2, 3), 
+     xlab="Campus Environment Impact on Mental and Emotional Health",
+     freq = FALSE, labels = c("Very Negatively","","","","","","Very Positively"), 
+     main="Hendrix Impact on Student Mental Health")
