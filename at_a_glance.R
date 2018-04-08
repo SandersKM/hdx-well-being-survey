@@ -18,15 +18,15 @@ response_rate <- function(col){
 
 
 #overall mental health  (scale:1-5)
-for(n in 1:length(dataset$Overall_MH_R)){
-  if(!is.na(dataset$Overall_MH_R[n]) && dataset$Overall_MH_R[n] > 5){
-    dataset$Overall_MH_R[n] <- NA} #This gets rid of the 6s in the data...
+for(n in 1:length(dataset$Overall_MH)){
+  if(!is.na(dataset$Overall_MH[n]) && dataset$Overall_MH[n] > 5){
+    dataset$Overall_MH[n] <- NA} #This gets rid of the 6s in the data...
 }
-mean(dataset$Overall_MH_R, na.rm=TRUE) 
-response_rate(dataset$Overall_MH_R)
-Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
-sqrt(Overall_MH_R_var) #Standard Deviation
-hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
+mean(dataset$Overall_MH, na.rm=TRUE) 
+response_rate(dataset$Overall_MH)
+Overall_MH_var <- var(dataset$Overall_MH, na.rm = TRUE)
+sqrt(Overall_MH_var) #Standard Deviation
+hist(na.omit(dataset$Overall_MH), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
      freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
      main="Overall Mental Health")
 
@@ -35,22 +35,22 @@ mean(dataset$MI_identity_R, na.rm=TRUE)
 response_rate(dataset$MI_identity_R)
 MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
 sqrt(MI_identity_R_var)#Standard Deviation
-hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5,6), 
+hist(na.omit(dataset$Overall_MH), breaks = c(0,1,2,3,4,5,6), 
      xlab="I see myself as a person with mental illness.",
      freq = FALSE, labels = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
      "Somewhat Agree", "Agree", "Strongly Agree"), 
      main="Mental Illness Identity")
 
 #overall physical health (scale: 1-5)
-for(n in 1:length(dataset$Overall_PH_R)){
-  if(!is.na(dataset$Overall_PH_R[n]) && dataset$Overall_PH_R[n] > 5){
-    dataset$Overall_PH_R[n] <- NA} #This gets rid of the 6s in the data...
+for(n in 1:length(dataset$Overall_PH)){
+  if(!is.na(dataset$Overall_PH[n]) && dataset$Overall_PH[n] > 5){
+    dataset$Overall_PH[n] <- NA} #This gets rid of the 6s in the data...
 }
-mean(dataset$Overall_PH_R, na.rm=TRUE) 
-response_rate(dataset$Overall_PH_R)
-Overall_PH_R_var <- var(dataset$Overall_PH_R, na.rm = TRUE)
-sqrt(Overall_PH_R_var)#Standard Deviation
-hist(na.omit(dataset$Overall_PH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
+mean(dataset$Overall_PH, na.rm=TRUE) 
+response_rate(dataset$Overall_PH)
+Overall_PH_var <- var(dataset$Overall_PH, na.rm = TRUE)
+sqrt(Overall_PH_var)#Standard Deviation
+hist(na.omit(dataset$Overall_PH), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
      freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
      main="Overall Physical Health")
 

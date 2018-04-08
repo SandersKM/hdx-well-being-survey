@@ -40,25 +40,27 @@ freq_bool <- function(col){
 }
 
 
+
+
 #################################################################################
 # At a glance
 #################################################################################
 
 #overall mental health  (scale:1-5)
-for(n in 1:length(dataset$Overall_MH_R)){
-  if(!is.na(dataset$Overall_MH_R[n]) && dataset$Overall_MH_R[n] > 5){
-    dataset$Overall_MH_R[n] <- NA} #This gets rid of the 6s in the data...
+for(n in 1:length(dataset$Overall_MH)){
+  if(!is.na(dataset$Overall_MH[n]) && dataset$Overall_MH[n] > 5){
+    dataset$Overall_MH[n] <- NA} #This gets rid of the 6s in the data...
 }
-Overall_MH_R_mean <- mean(dataset$Overall_MH_R, na.rm=TRUE)
-Overall_MH_R_var <- var(dataset$Overall_MH_R, na.rm = TRUE)
-Overall_MH_R_std <- std(dataset$Overall_MH_R)
-Overall_MH_R_rr <- response_rate(dataset$Overall_MH_R)
-Overall_MH_R_hist <- hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
+Overall_MH_mean <- mean(dataset$Overall_MH, na.rm=TRUE)
+Overall_MH_var <- var(dataset$Overall_MH, na.rm = TRUE)
+Overall_MH_std <- std(dataset$Overall_MH)
+Overall_MH_rr <- response_rate(dataset$Overall_MH)
+Overall_MH_hist <- hist(na.omit(dataset$Overall_MH), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
      freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
      main="Overall Mental Health")
 
-analysis <- data.frame("Name"="Overall_MH_R","Mean"=Overall_MH_R_mean, 
-                       "Std" = Overall_MH_R_std, "Response Rate"= Overall_MH_R_rr,
+analysis <- data.frame("Name"="Overall_MH","Mean"=Overall_MH_mean, 
+                       "Std" = Overall_MH_std, "Response Rate"= Overall_MH_rr,
                        stringsAsFactors = FALSE)
 
 #“I see myself as a person with mental illness” (scale:1-6)
@@ -66,7 +68,7 @@ MI_identity_R_mean <- mean(dataset$MI_identity_R, na.rm=TRUE)
 MI_identity_R_var <- var(dataset$MI_identity_R, na.rm = TRUE)
 MI_identity_R_std <- std(dataset$MI_identity_R)
 MI_identity_R_rr <- response_rate(dataset$MI_identity_R)
-MI_identity_R_hist<- hist(na.omit(dataset$Overall_MH_R), breaks = c(0,1,2,3,4,5,6), 
+MI_identity_R_hist<- hist(na.omit(dataset$Overall_MH), breaks = c(0,1,2,3,4,5,6), 
      xlab="I see myself as a person with mental illness.",
      freq = FALSE, labels = c("Strongly Disagree", "Disagree", "Somewhat Disagree",
                               "Somewhat Agree", "Agree", "Strongly Agree"), 
@@ -76,20 +78,20 @@ analysis <- rbind(analysis, list("MI_identity_R", MI_identity_R_mean,
                                  MI_identity_R_std, MI_identity_R_rr))
 
 #overall physical health (scale: 1-5)
-for(n in 1:length(dataset$Overall_PH_R)){
-  if(!is.na(dataset$Overall_PH_R[n]) && dataset$Overall_PH_R[n] > 5){
-    dataset$Overall_PH_R[n] <- NA} #This gets rid of the 6s in the data...
+for(n in 1:length(dataset$Overall_PH)){
+  if(!is.na(dataset$Overall_PH[n]) && dataset$Overall_PH[n] > 5){
+    dataset$Overall_PH[n] <- NA} #This gets rid of the 6s in the data...
 }
-Overall_PH_R_mean <- mean(dataset$Overall_PH_R, na.rm=TRUE) 
-Overall_PH_R_var <- var(dataset$Overall_PH_R, na.rm = TRUE)
-Overall_PH_R_std <- sqrt(Overall_PH_R_var)
-Overall_PH_R_rr <- response_rate(dataset$Overall_PH_R)
-Overall_PH_R_hist <- hist(na.omit(dataset$Overall_PH_R), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
+Overall_PH_mean <- mean(dataset$Overall_PH, na.rm=TRUE) 
+Overall_PH_var <- var(dataset$Overall_PH, na.rm = TRUE)
+Overall_PH_std <- sqrt(Overall_PH_var)
+Overall_PH_rr <- response_rate(dataset$Overall_PH)
+Overall_PH_hist <- hist(na.omit(dataset$Overall_PH), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
                           freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
                           main="Overall Physical Health")
 
-analysis <- rbind(analysis, list("Overall_PH_R", Overall_PH_R_mean, 
-                                 Overall_PH_R_std, Overall_PH_R_rr))
+analysis <- rbind(analysis, list("Overall_PH", Overall_PH_mean, 
+                                 Overall_PH_std, Overall_PH_rr))
 
 #overall stress (scale: 1-10)
 Overall_stress_mean <- mean(dataset$Overall_stress, na.rm=TRUE) 
@@ -1018,7 +1020,16 @@ corcov <- rbind(corcov, list("Hours_screentime", "Overall_stress", Overall_stres
 # 
 #################################################################################
 
+#plot(dataset$Overall_MH, dataset$Overall_stress,xlab="Overall Mental Health",
+#     ylab="Overall Stress", main="Stress vs Mental Health", frame.plot=FALSE, 
+#     col=ifelse(dataset$Gender==1,"red",ifelse(dataset$Gender==2, "blue", "yellow")))
+#legend("topleft", pch=c(2,2,2), col=c("red", "blue", "yellow"), 
+#       c("Male", "Female", "Other"), bty="o", cex=.8)
+
+correlations <- cor(dataset[sapply(dataset, is.numeric)], use="pairwise", method="pearson")
+
 #Be aware that the headers will be shifted over one if you open in Excel
 #Export the dataframes to a CSV:
 write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis.txt", sep=",")
 write.table(corcov, "C:/Users/kates/Desktop/HWBS2017_CorCov.txt", sep=",")
+write.table(correlations, "C:/Users/kates/Desktop/HWBS2017_Correlations.txt", sep=",")
