@@ -124,7 +124,7 @@ trans_compile <- function(dataframe){
 }
 
 ##########################################################################################################################
-# Compare By Race
+# Compare By Race (White vs POC)
 ##########################################################################################################################
 
 race1_compare <- function(dataframe, c, cName){
@@ -151,5 +151,63 @@ race1_compile <- function(dataframe){
 }
 
 ##########################################################################################################################
-#
+# Compare By Race (Less Generalized)
 ##########################################################################################################################
+
+race2_compare <- function(dataframe, c, cName){
+  dataframe <- rbind(dataframe, to_table_general(7, "White", dataset$Race, c, cName))
+  dataframe <- rbind(dataframe, to_table_general(2, "Asian", dataset$Race, c, cName))
+  dataframe <- rbind(dataframe, to_table_general(3, "Black", dataset$Race, c, cName))
+  dataframe <- rbind(dataframe, to_table_general(4, "Hispanic", dataset$Race, c, cName))
+  dataframe <- rbind(dataframe, to_table_general(5, "Middle_Eastern", dataset$Race, c, cName))
+  dataframe <- rbind(dataframe, to_table_general(8, "Multiracial", dataset$Race, c, cName))
+  dataframe <- rbind(dataframe, to_table(7, 2,"White", "Asian",dataset$Race,c, cName))
+  dataframe <- rbind(dataframe, to_table(7, 3,"White", "Black",dataset$Race,c, cName))
+  dataframe <- rbind(dataframe, to_table(7, 4,"White", "Hispanic",dataset$Race,c, cName))
+  dataframe <- rbind(dataframe, to_table(7, 5,"White", "Middle_Eastern",dataset$Race,c, cName))
+  dataframe <- rbind(dataframe, to_table(7, 8,"White", "Multiracial",dataset$Race,c, cName))
+  return(dataframe)
+}
+
+race2_compile <- function(dataframe){
+  dataframe <- race2_compare(dataframe, dataset$Overall_MH, "Overall_MH")
+  dataframe <- race2_compare(dataframe, dataset$Overall_stress, "Overall_stress")
+  dataframe <- race2_compare(dataframe, dataset$Depression_total, "Depression_total")
+  dataframe <- race2_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- race2_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
+  dataframe <- race2_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
+  dataframe <- race2_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- race2_compare(dataframe, dataset$MH_needs, "MH_needs")
+  dataframe <- race2_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
+  dataframe <- race2_compare(dataframe, dataset$MH_training, "MH_training")
+  dataframe <- race2_compare(dataframe, dataset$MH_academic_impact, "MH_academic_impact")
+  dataframe <- race2_compare(dataframe, dataset$Belonging_total, "Belonging_total")
+  return(dataframe[-1,])
+}
+
+##########################################################################################################################
+# Compare By Sexuality
+##########################################################################################################################
+
+sexuality1_compare <- function(dataframe, c, cName){
+  dataframe <- rbind(dataframe, to_table_general(9, "Heterosexual", dataset$Sexual_orientation, c, cName))
+  dataframe <- rbind(dataframe, to_table_general_excluding(9, "LGBTQ+", dataset$Sexual_orientation, c, cName))
+  dataframe <- rbind(dataframe, to_table_excluding(9,"Heterosexual", "LGBTQ+",dataset$Sexual_orientation,c, cName))
+  return(dataframe)
+}
+
+sexuality1_compile <- function(dataframe){
+  dataframe <- sexuality1_compare(dataframe, dataset$Overall_MH, "Overall_MH")
+  dataframe <- sexuality1_compare(dataframe, dataset$Overall_stress, "Overall_stress")
+  dataframe <- sexuality1_compare(dataframe, dataset$Depression_total, "Depression_total")
+  dataframe <- sexuality1_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- sexuality1_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
+  dataframe <- sexuality1_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
+  dataframe <- sexuality1_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- sexuality1_compare(dataframe, dataset$MH_needs, "MH_needs")
+  dataframe <- sexuality1_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
+  dataframe <- sexuality1_compare(dataframe, dataset$MH_training, "MH_training")
+  dataframe <- sexuality1_compare(dataframe, dataset$MH_academic_impact, "MH_academic_impact")
+  dataframe <- sexuality1_compare(dataframe, dataset$Belonging_total, "Belonging_total")
+  return(dataframe[-1,])
+}
