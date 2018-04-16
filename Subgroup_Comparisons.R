@@ -76,6 +76,26 @@ to_table_different <- function(xName, yName, sortOn1, sortOn2, c, cName) {
 
 
 ##########################################################################################################################
+# Compile Comparisons
+##########################################################################################################################
+
+write.table(gender_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/gender.txt", sep=",")
+write.table(trans_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/trans.txt", sep=",")
+write.table(race1_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/race1.txt", sep=",")
+write.table(race2_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/race2.txt", sep=",")
+write.table(sexuality1_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/sexuality1.txt", sep=",")
+write.table(sexuality2_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/sexuality2.txt", sep=",")
+write.table(SES_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/SES.txt", sep=",")
+write.table(Religion_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/religion.txt", sep=",")
+write.table(year_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/year.txt", sep=",")
+write.table(transfer_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/transfer.txt", sep=",")
+write.table(first_gen_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/first_gen.txt", sep=",")
+write.table(International_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/international.txt", sep=",")
+write.table(disability_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/disability.txt", sep=",")
+write.table(Major_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/major.txt", sep=",")
+
+
+##########################################################################################################################
 # Compare By Gender
 ##########################################################################################################################
 

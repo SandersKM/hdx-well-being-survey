@@ -1,12 +1,4 @@
-# Main analysis file for the Hendrix Well Being Initiative Survey Analysis
-# Created by Kate Sanders in Spring 2018
-# After running this file, you can get the desired values by typing:
-# Mean: categoryname_mean
-# Variance: categoryname_var
-# Standard Deviation: categoryname_std
-# Response Rate: categoryname_rr
-# Some of the categories other anayses accessed as: categoryname_anaysisname
-# All of these values will appear automatically if you just run the subanalysis files
+
 
 # You will need to instal these libraries is they aren't in your own RStudio. 
 # Use: install.packages("packagename")
@@ -20,7 +12,7 @@ library(readxl) #library used to import Excel data
 alldata <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
 
 # CHANGE THE SECOND PARAMETER IN SUBSET TO LOOK AT DIFFERENT POPULAITONS
-dataset <- subset(alldata,  alldata$Gender ==2 )
+dataset <- subset(alldata,  alldata$Trans == 1)
 rownum <- nrow(dataset) #total number of responses recorded
 
 #function for determining the response rate (% data that was not NA)
@@ -1022,6 +1014,6 @@ corcov <- rbind(corcov, list("Hours_screentime", "Overall_stress", Overall_stres
 
 #Be aware that the headers will be shifted over one if you open in Excel
 #Export the dataframes to a CSV:
-write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis_Female.txt", sep=",")
-write.table(corcov, "C:/Users/kates/Desktop/HWBS2017_CorCov_Female.txt", sep=",")
+write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis_Trans.txt", sep=",")
+write.table(corcov, "C:/Users/kates/Desktop/HWBS2017_CorCov_Trans.txt", sep=",")
 #write.table(correlations, "C:/Users/kates/Desktop/HWBS2017_Correlations.txt", sep=",")
