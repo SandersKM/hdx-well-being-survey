@@ -45,7 +45,7 @@ to_table_excluding <- function(x,xName, yName, sortOn,c, cName) {
 # compares the data of everything but one subgroup to total data
 to_table_general_excluding <- function(x,xName,sortOn,c, cName) {
   t <- t_test(t.test(c[sortOn!=x], c))
-  return (list(cName,"All_Data",xName,  
+  return (list(cName,xName,  "All_Data",
                t[[1]], std(c[sortOn!=x]), 
                t[[2]],std(c), t[[5]]))
 }
@@ -61,7 +61,7 @@ to_table <- function(x,y,xName, yName, sortOn,c, cName) {
 # compares the data of one subgroup to the full group
 to_table_general <- function(x,xName,sortOn,c, cName) {
   t <- t_test(t.test(c[sortOn==x], c))
-  return (list(cName,"All_Data",xName,  
+  return (list(cName,xName,  "All_Data",
                t[[1]], std(c[sortOn==x]), 
                t[[2]],std(c), t[[5]]))
 }
