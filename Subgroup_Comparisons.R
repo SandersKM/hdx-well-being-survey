@@ -529,3 +529,70 @@ disability_compile <- function(dataframe){
   dataframe <- disability_compare(dataframe, dataset$Belonging_total, "Belonging_total")
   return(dataframe[-1,])
 }
+
+#####################################################################################
+# BOXPLOTS
+#####################################################################################
+
+boxplot(dataset$HDX_MH_impact[dataset$Year==1],dataset$HDX_MH_impact[dataset$Year==2],
+        dataset$HDX_MH_impact[dataset$Year==3],dataset$HDX_MH_impact[dataset$Year==4], 
+        main="Hendrix Mental Health Impact", names=c("Freshmen", "Sophomores","Juniors","Seniors"))
+
+
+boxplot(dataset$MI_identity[dataset$Disability_status==1],dataset$MI_identity[dataset$Disability_status==2],
+        main="Mental Illness Identity", names=c("Disabled", "Able Bodied"))
+
+boxplot(dataset$Depression_total[dataset$First_gen==1],dataset$Depression_total[dataset$First_gen==2],
+        main="Total Depression", names=c("First Generation", "Not First Generation"))
+
+boxplot(dataset$Overall_stress[dataset$Sexual_orientation==9],dataset$Overall_stress[dataset$Sexual_orientation==2],
+        dataset$Overall_stress[dataset$Sexual_orientation==3],dataset$Overall_stress[dataset$Sexual_orientation==4],
+        dataset$Overall_stress[dataset$Sexual_orientation==5],dataset$Overall_stress[dataset$Sexual_orientation==6],
+        dataset$Overall_stress[dataset$Sexual_orientation==1],
+        dataset$Overall_stress[dataset$Sexual_orientation==7],dataset$Overall_stress[dataset$Sexual_orientation==0],
+        main="Overall Stress", names=c("Heterosexual", "Bisexual", "Gay", "Lesbian","Pansexual","Queer", "Asexual",
+                                         "Questioning","Other"), mar = c(5, 2, 2, 2) , las = 2)
+
+boxplot(dataset$Depression_total[dataset$Sexual_orientation==9],dataset$Depression_total[dataset$Sexual_orientation!=9],
+        main="Total Depression", names=c("Heterosexual", "LGBTQA+"))
+
+boxplot(dataset$MH_needs[dataset$Gender==1],dataset$MH_needs[dataset$Gender==2],dataset$MH_needs[dataset$Gender==3],
+        main="Mental Health Needs", names=c("Male", "Female", "Other"))
+
+boxplot(dataset$MHCSF_total[dataset$SESrung ==1],dataset$MHCSF_total[dataset$SESrung ==2],
+        dataset$MHCSF_total[dataset$SESrung ==3],dataset$MHCSF_total[dataset$SESrung ==4],
+        dataset$MHCSF_total[dataset$SESrung ==5],dataset$MHCSF_total[dataset$SESrung ==6],
+        dataset$MHCSF_total[dataset$SESrung ==7],dataset$MHCSF_total[dataset$SESrung ==8],
+        dataset$MHCSF_total[dataset$SESrung ==9],dataset$MHCSF_total[dataset$SESrung ==10],
+        main="MHCSF Total", names = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), xlab=("SES Rung"))
+
+boxplot(dataset$Overall_MH[dataset$Religious_affiliation ==1],dataset$Overall_MH[dataset$Religious_affiliation ==2],
+        dataset$Overall_MH[dataset$Religious_affiliation ==4],
+        dataset$Overall_MH[dataset$Religious_affiliation ==5],
+        dataset$Overall_MH[dataset$Religious_affiliation ==7],
+        dataset$Overall_MH[dataset$Religious_affiliation ==9],
+        dataset$Overall_MH[dataset$Religious_affiliation ==10],
+        dataset$Overall_MH[dataset$Religious_affiliation ==12],
+        dataset$Overall_MH[dataset$Religious_affiliation ==11], las=2,
+        main="Overall Mental Health", names = c("Agnostic", "Athiest", "Catholic", "Christian", "Jewish",
+                                      "Muslim", "No Pref", "Other", "Multiple"))
+
+
+boxplot(dataset$MI_identity[dataset$Humanities==1],dataset$MI_identity[dataset$Social_sciences==1],
+        dataset$MI_identity[dataset$Natural_sciences==1],dataset$MI_identity[dataset$Interdisciplinary==1],
+        dataset$MI_identity[dataset$Undeclared==1], las = 2,
+        main="Mental Illness Identity", names=c("Humanities", "Social Sciences", "Natural Sciences", "Interdisciplinary",
+                                            "Undeclared"))
+
+boxplot(dataset$MH_academic_impact[dataset$Trans==1],dataset$MH_academic_impact[dataset$Trans!=1],
+        main="Mental Health Academic Impact", names=c("Trans", "Cis"))
+
+
+boxplot(dataset$Belonging_total[dataset$Race ==2],
+        dataset$Belonging_total[dataset$Race ==3],
+        dataset$Belonging_total[dataset$Race ==4],
+        dataset$Belonging_total[dataset$Race ==5],
+        dataset$Belonging_total[dataset$Race ==7],
+        dataset$Belonging_total[dataset$Race ==8], las = 2,
+        main="Belonging Total", names = c("Asian", "African American", "Hispanic", "Middle Eastern",
+                                      "Caucasian", "Multiracial"))
