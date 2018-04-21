@@ -9,7 +9,7 @@ library(ggplot2)
 library(data.table) # for the set method
 library(readxl) #library used to import Excel data
 # import the Hendrix Well Being Survey Data (change location for your own HWBS Data)
-dataset <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
+dataset <- read_excel("C:/Users/kates/Desktop/HWBI/HWBS/HWBS_STUDENTS_2017_condensed.xlsx")
 
 # Used to calculate Standard Deviation  
 std <- function(col){
@@ -79,20 +79,20 @@ to_table_different <- function(xName, yName, sortOn1, sortOn2, c, cName) {
 # Compile Comparisons
 ##########################################################################################################################
 
-write.table(gender_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/gender.txt", sep=",")
-write.table(trans_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/trans.txt", sep=",")
-write.table(race1_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/race1.txt", sep=",")
-write.table(race2_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/race2.txt", sep=",")
-write.table(sexuality1_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/sexuality1.txt", sep=",")
-write.table(sexuality2_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/sexuality2.txt", sep=",")
-write.table(SES_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/SES.txt", sep=",")
-write.table(Religion_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/religion.txt", sep=",")
-write.table(year_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/year.txt", sep=",")
-write.table(transfer_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/transfer.txt", sep=",")
-write.table(first_gen_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/first_gen.txt", sep=",")
-write.table(International_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/international.txt", sep=",")
-write.table(disability_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/disability.txt", sep=",")
-write.table(Major_compile(t_tests), "C:/Users/kates/Desktop/Subgroup_Comparisons/major.txt", sep=",")
+write.table(gender_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/gender.txt", sep=",")
+write.table(trans_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/trans.txt", sep=",")
+write.table(race1_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/race1.txt", sep=",")
+write.table(race2_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/race2.txt", sep=",")
+write.table(sexuality1_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/sexuality1.txt", sep=",")
+write.table(sexuality2_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/sexuality2.txt", sep=",")
+write.table(SES_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/SES.txt", sep=",")
+write.table(Religion_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/religion.txt", sep=",")
+write.table(year_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/year.txt", sep=",")
+write.table(transfer_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/transfer.txt", sep=",")
+write.table(first_gen_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/first_gen.txt", sep=",")
+write.table(International_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/international.txt", sep=",")
+write.table(disability_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/disability.txt", sep=",")
+write.table(Major_compile(t_tests), "C:/Users/kates/Desktop/HWBI/Subgroup_Comparisons/major.txt", sep=",")
 
 
 ##########################################################################################################################
@@ -113,10 +113,10 @@ gender_compile <- function(dataframe){
   dataframe <- gender_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- gender_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- gender_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- gender_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- gender_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- gender_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- gender_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- gender_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- gender_compare(dataframe, dataset$MI_identity_R_R_R, "MI_identity_R_R_R")
   dataframe <- gender_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- gender_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- gender_compare(dataframe, dataset$MH_training, "MH_training")
@@ -140,10 +140,10 @@ trans_compile <- function(dataframe){
   dataframe <- trans_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- trans_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- trans_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- trans_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- trans_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- trans_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- trans_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- trans_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- trans_compare(dataframe, dataset$MI_identity_R_R, "MI_identity_R_R")
   dataframe <- trans_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- trans_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- trans_compare(dataframe, dataset$MH_training, "MH_training")
@@ -167,10 +167,10 @@ race1_compile <- function(dataframe){
   dataframe <- race1_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- race1_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- race1_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- race1_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- race1_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- race1_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- race1_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- race1_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- race1_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- race1_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- race1_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- race1_compare(dataframe, dataset$MH_training, "MH_training")
@@ -202,10 +202,10 @@ race2_compile <- function(dataframe){
   dataframe <- race2_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- race2_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- race2_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- race2_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- race2_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- race2_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- race2_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- race2_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- race2_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- race2_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- race2_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- race2_compare(dataframe, dataset$MH_training, "MH_training")
@@ -229,10 +229,10 @@ sexuality1_compile <- function(dataframe){
   dataframe <- sexuality1_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- sexuality1_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- sexuality1_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- sexuality1_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- sexuality1_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- sexuality1_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- sexuality1_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- sexuality1_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- sexuality1_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- sexuality1_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- sexuality1_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- sexuality1_compare(dataframe, dataset$MH_training, "MH_training")
@@ -270,10 +270,10 @@ sexuality2_compile <- function(dataframe){
   dataframe <- sexuality2compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- sexuality2compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- sexuality2compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- sexuality2compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- sexuality2compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- sexuality2compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- sexuality2compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- sexuality2compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- sexuality2compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- sexuality2compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- sexuality2compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- sexuality2compare(dataframe, dataset$MH_training, "MH_training")
@@ -307,10 +307,10 @@ SES_compile <- function(dataframe){
   dataframe <- SES_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- SES_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- SES_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- SES_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- SES_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- SES_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- SES_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- SES_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- SES_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- SES_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- SES_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- SES_compare(dataframe, dataset$MH_training, "MH_training")
@@ -341,10 +341,10 @@ Religion_compile <- function(dataframe){
   dataframe <- Religion_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- Religion_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- Religion_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- Religion_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- Religion_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- Religion_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- Religion_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- Religion_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- Religion_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- Religion_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- Religion_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- Religion_compare(dataframe, dataset$MH_training, "MH_training")
@@ -373,10 +373,10 @@ year_compile <- function(dataframe){
   dataframe <- year_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- year_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- year_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- year_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- year_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- year_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- year_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- year_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- year_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- year_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- year_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- year_compare(dataframe, dataset$MH_training, "MH_training")
@@ -400,10 +400,10 @@ transfer_compile <- function(dataframe){
   dataframe <- transfer_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- transfer_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- transfer_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- transfer_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- transfer_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- transfer_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- transfer_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- transfer_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- transfer_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- transfer_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- transfer_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- transfer_compare(dataframe, dataset$MH_training, "MH_training")
@@ -427,10 +427,10 @@ International_compile <- function(dataframe){
   dataframe <- International_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- International_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- International_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- International_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- International_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- International_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- International_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- International_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- International_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- International_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- International_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- International_compare(dataframe, dataset$MH_training, "MH_training")
@@ -454,10 +454,10 @@ first_gen_compile <- function(dataframe){
   dataframe <- first_gen_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- first_gen_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- first_gen_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- first_gen_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- first_gen_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- first_gen_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- first_gen_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- first_gen_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- first_gen_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- first_gen_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- first_gen_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- first_gen_compare(dataframe, dataset$MH_training, "MH_training")
@@ -489,10 +489,10 @@ Major_compile <- function(dataframe){
   dataframe <- Major_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- Major_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- Major_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- Major_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- Major_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- Major_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- Major_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- Major_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- Major_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- Major_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- Major_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- Major_compare(dataframe, dataset$MH_training, "MH_training")
@@ -518,10 +518,10 @@ disability_compile <- function(dataframe){
   dataframe <- disability_compare(dataframe, dataset$Overall_MH, "Overall_MH")
   dataframe <- disability_compare(dataframe, dataset$Overall_stress, "Overall_stress")
   dataframe <- disability_compare(dataframe, dataset$Depression_total, "Depression_total")
-  dataframe <- disability_compare(dataframe, dataset$Anxiety_academic_impact, "Anxiety_total")
+  dataframe <- disability_compare(dataframe, dataset$Anxiety_total, "Anxiety_total")
   dataframe <- disability_compare(dataframe, dataset$MHCSF_total, "MHCSF_total")
   dataframe <- disability_compare(dataframe, dataset$HDX_MH_impact, "HDX_MH_impact")
-  dataframe <- disability_compare(dataframe, dataset$MI_identity, "MI_identity")
+  dataframe <- disability_compare(dataframe, dataset$MI_identity_R, "MI_identity_R")
   dataframe <- disability_compare(dataframe, dataset$MH_needs, "MH_needs")
   dataframe <- disability_compare(dataframe, dataset$MH_needs_met, "MH_needs_met")
   dataframe <- disability_compare(dataframe, dataset$MH_training, "MH_training")
@@ -539,11 +539,11 @@ boxplot(dataset$HDX_MH_impact[dataset$Year==1],dataset$HDX_MH_impact[dataset$Yea
         main="Hendrix Mental Health Impact", names=c("Freshmen", "Sophomores","Juniors","Seniors"))
 
 
-boxplot(dataset$MI_identity[dataset$Disability_status==1],dataset$MI_identity[dataset$Disability_status==2],
+boxplot(dataset$MI_identity_R[dataset$Disability_status==1],dataset$MI_identity_R[dataset$Disability_status==2],
         main="Mental Illness Identity", names=c("Disabled", "Able Bodied"))
 
-boxplot(dataset$Depression_total[dataset$First_gen==1],dataset$Depression_total[dataset$First_gen==2],
-        main="Total Depression", names=c("First Generation", "Not First Generation"))
+boxplot(dataset$Anxiety_total[dataset$First_gen==1],dataset$Anxiety_total[dataset$First_gen==2],
+        main="Anxiety Total", names=c("First Generation", "Not First Generation"))
 
 boxplot(dataset$Overall_stress[dataset$Sexual_orientation==9],dataset$Overall_stress[dataset$Sexual_orientation==2],
         dataset$Overall_stress[dataset$Sexual_orientation==3],dataset$Overall_stress[dataset$Sexual_orientation==4],
@@ -578,9 +578,9 @@ boxplot(dataset$Overall_MH[dataset$Religious_affiliation ==1],dataset$Overall_MH
                                       "Muslim", "No Pref", "Other", "Multiple"))
 
 
-boxplot(dataset$MI_identity[dataset$Humanities==1],dataset$MI_identity[dataset$Social_sciences==1],
-        dataset$MI_identity[dataset$Natural_sciences==1],dataset$MI_identity[dataset$Interdisciplinary==1],
-        dataset$MI_identity[dataset$Undeclared==1], las = 2,
+boxplot(dataset$MI_identity_R[dataset$Humanities==1],dataset$MI_identity_R[dataset$Social_sciences==1],
+        dataset$MI_identity_R[dataset$Natural_sciences==1],dataset$MI_identity_R[dataset$Interdisciplinary==1],
+        dataset$MI_identity_R[dataset$Undeclared==1], las = 2,
         main="Mental Illness Identity", names=c("Humanities", "Social Sciences", "Natural Sciences", "Interdisciplinary",
                                             "Undeclared"))
 
@@ -596,3 +596,4 @@ boxplot(dataset$Belonging_total[dataset$Race ==2],
         dataset$Belonging_total[dataset$Race ==8], las = 2,
         main="Belonging Total", names = c("Asian", "African American", "Hispanic", "Middle Eastern",
                                       "Caucasian", "Multiracial"))
+

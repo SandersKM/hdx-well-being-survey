@@ -29,14 +29,14 @@ var(dataset$Hours_sleep, na.rm = TRUE)
 std(dataset$Hours_sleep)
 response_rate(dataset$Hours_sleep)
 
-#Sleep Quality (Scale: 1=very good - 4=very bad)
-min(dataset$Sleep_quality, na.rm=TRUE) #minimum
-max(dataset$Sleep_quality, na.rm=TRUE) #maximum
-mean(dataset$Sleep_quality, na.rm=TRUE) 
-var(dataset$Sleep_quality, na.rm = TRUE)
-std(dataset$Sleep_quality)
-response_rate(dataset$Sleep_quality)
-boxplot(dataset$Sleep_quality)
+#Sleep Quality (Scale: 4=very good - 1=very bad)
+min(dataset$Sleep_quality_R, na.rm=TRUE) #minimum
+max(dataset$Sleep_quality_R, na.rm=TRUE) #maximum
+mean(dataset$Sleep_quality_R, na.rm=TRUE) 
+var(dataset$Sleep_quality_R, na.rm = TRUE)
+std(dataset$Sleep_quality_R)
+response_rate(dataset$Sleep_quality_R)
+boxplot(dataset$Sleep_quality_R)
 
 #Sleep Hygiene (Scale: 14=very good - 70=very bad)
 min(dataset$SHI_total, na.rm=TRUE) #minimum

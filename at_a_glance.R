@@ -1,7 +1,7 @@
 
 library(readxl) #library used to import Excel data
 # import the Hendrix Well Being Survey Data (change location for your own HWBS Data)
-dataset <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
+dataset <- read_excel("C:/Users/kates/Desktop/HWBI/HWBS/HWBS_STUDENTS_2017_condensed.xlsx")
 rownum <- 531 #total number of responses recorded
 
 #function for determining the response rate (% data that was not NA)
@@ -18,15 +18,13 @@ response_rate <- function(col){
 
 
 #overall mental health  (scale:1-5)
-for(n in 1:length(dataset$Overall_MH)){
-  if(!is.na(dataset$Overall_MH[n]) && dataset$Overall_MH[n] > 5){
-    dataset$Overall_MH[n] <- NA} #This gets rid of the 6s in the data...
-}
+
 mean(dataset$Overall_MH, na.rm=TRUE) 
 response_rate(dataset$Overall_MH)
 Overall_MH_var <- var(dataset$Overall_MH, na.rm = TRUE)
 sqrt(Overall_MH_var) #Standard Deviation
-hist(na.omit(dataset$Overall_MH), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health",
+par( mar=c(0,3,2,0))
+hist(na.omit(dataset$Overall_MH), breaks = c(0,1,2,3,4,5), xlab="Description of Mental Health", ylab = "Frequency",
      freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
      main="Overall Mental Health")
 

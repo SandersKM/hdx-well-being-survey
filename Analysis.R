@@ -17,7 +17,7 @@ library(ggplot2)
 library(data.table) # for the set method
 library(readxl) #library used to import Excel data
 # import the Hendrix Well Being Survey Data (change location for your own HWBS Data)
-dataset <- read_excel("C:/Users/kates/Desktop/HWBS_STUDENTS_2017_condensed.xlsx")
+dataset <- read_excel("C:/Users/kates/Desktop/HWBI/HWBS/HWBS_STUDENTS_2017_condensed.xlsx")
 rownum <- nrow(dataset) #total number of responses recorded
 
 #function for determining the response rate (% data that was not NA)
@@ -47,10 +47,7 @@ freq_bool <- function(col){
 #################################################################################
 
 #overall mental health  (scale:1-5)
-for(n in 1:length(dataset$Overall_MH)){
-  if(!is.na(dataset$Overall_MH[n]) && dataset$Overall_MH[n] > 5){
-    dataset$Overall_MH[n] <- NA} #This gets rid of the 6s in the data...
-}
+
 Overall_MH_mean <- mean(dataset$Overall_MH, na.rm=TRUE)
 Overall_MH_var <- var(dataset$Overall_MH, na.rm = TRUE)
 Overall_MH_std <- std(dataset$Overall_MH)
@@ -78,17 +75,14 @@ analysis <- rbind(analysis, list("MI_identity_R", MI_identity_R_mean,
                                  MI_identity_R_std, MI_identity_R_rr))
 
 #overall physical health (scale: 1-5)
-for(n in 1:length(dataset$Overall_PH)){
-  if(!is.na(dataset$Overall_PH[n]) && dataset$Overall_PH[n] > 5){
-    dataset$Overall_PH[n] <- NA} #This gets rid of the 6s in the data...
-}
+
 Overall_PH_mean <- mean(dataset$Overall_PH, na.rm=TRUE) 
 Overall_PH_var <- var(dataset$Overall_PH, na.rm = TRUE)
 Overall_PH_std <- sqrt(Overall_PH_var)
 Overall_PH_rr <- response_rate(dataset$Overall_PH)
 Overall_PH_hist <- hist(na.omit(dataset$Overall_PH), breaks = c(0,1,2,3,4,5), xlab="Description of Physical Health",
                           freq = FALSE, labels = c("Very Poor", "Poor", "Fair", "Good", "Excellent"), 
-                          main="Overall Physical Health")
+                          main="Overall Physical Health", ylim = range(0,0.5))
 
 analysis <- rbind(analysis, list("Overall_PH", Overall_PH_mean, 
                                  Overall_PH_std, Overall_PH_rr))
@@ -98,8 +92,8 @@ Overall_stress_mean <- mean(dataset$Overall_stress, na.rm=TRUE)
 Overall_stress_var <- var(dataset$Overall_stress, na.rm = TRUE)
 Overall_stress_std <- sqrt(Overall_stress_var)
 Overall_stress_rr <- response_rate(dataset$Overall_stress)
-Overall_stress_hist <- hist(na.omit(dataset$Overall_stress), breaks = c(0,1,2,3,4,5,6,7,8,9,10), xlab="Average Stress Level in the Past Month",
-     freq = FALSE, labels = c("No Stress","","","","","","","","","Extreme Stress"), 
+Overall_stress_hist <- hist(na.omit(dataset$Overall_stress), breaks = c(-.1,1,2,3,4,5,6,7,8,9,10.05), xlab="Average Stress Level in the Past Month",
+     freq = FALSE, labels = c("No \nStress","","","","","","","","","Very\nHigh\n Stress"), 
      main="Overall Stress")
 
 
@@ -116,7 +110,7 @@ outlierReplace = function(dataframe, cols, rows, newValue = NA) {
 Hours_exercising_mean <- mean(dataset$Hours_exercising, na.rm=TRUE) #including outliers
 Hours_exercising_var <- var(dataset$Hours_exercising, na.rm = TRUE)
 Hours_exercising_std <- sqrt(Hours_exercising_var)
-Hours_exercising_box <- boxplot(dataset$Hours_exercising) #Boxplot with outliers
+Hours_exercising_box <- boxplot(dataset$Hours_exercising, main="Typical Hours Spent Exercising per Week") #Boxplot with outliers
 Hours_exercising_rr <- response_rate(dataset$Hours_exercising)
 Hours_exercising_summary <- summary(dataset$Hours_exercising)
 
@@ -142,6 +136,7 @@ Hours_sleep_summary <- summary(dataset$Hours_sleep)
 Hours_sleep_mean <- mean(dataset$Hours_sleep, na.rm=TRUE) 
 Hours_sleep_var <- var(dataset$Hours_sleep, na.rm = TRUE)
 Hours_sleep_std <- sqrt(Hours_sleep_var)
+Hours_sleep_box <- boxplot(dataset$Hours_sleep, main="Typical Hours of Sleep per Night")
 Hours_sleep_rr <- response_rate(dataset$Hours_sleep)
 
 analysis <- rbind(analysis, list("Hours_sleep", Hours_sleep_mean, 
@@ -152,10 +147,10 @@ HDX_MH_impact_mean <- mean(dataset$HDX_MH_impact, na.rm=TRUE)
 HDX_MH_impact_var <- var(dataset$HDX_MH_impact, na.rm = TRUE)
 HDX_MH_impact_std <- sqrt(HDX_MH_impact_var)
 HDX_MH_impact_rr <- response_rate(dataset$HDX_MH_impact)
-HDX_MH_impact_box <- boxplot(dataset$HDX_MH_impact) #the responses here are very symetrical 
+HDX_MH_impact_box <- boxplot(dataset$HDX_MH_impact, ylab="Hendrix Mental Health Impact", pars = list(par(mar=c(5,4,4,2)+0.1))) #the responses here are very symetrical 
 HDX_MH_impact_hist <- hist(na.omit(dataset$HDX_MH_impact), breaks = c(-4,-3, -2, -1, 0, 1, 2, 3), 
                      xlab="Campus Environment Impact on Mental and Emotional Health",
-                     freq = FALSE, labels = c("Very Negatively","","","","","","Very Positively"), 
+                     freq = FALSE, labels = c("Very \n Negative","","","","","","Very \n Positive"), 
                      main="Hendrix Impact on Student Mental Health")
 
 analysis <- rbind(analysis, list("HDX_MH_impact", HDX_MH_impact_mean, 
@@ -169,7 +164,7 @@ MHCSF_total_mean <- mean(dataset$MHCSF_total, na.rm=TRUE)
 MHCSF_total_var <- var(dataset$MHCSF_total,na.rm = TRUE)
 MHCSF_total_std <- std(dataset$MHCSF_total)
 MHCSF_total_rr <- response_rate(dataset$MHCSF_total)
-MHCSF_total_box <- boxplot(dataset$MHCSF_total)
+MHCSF_total_box <- boxplot(dataset$MHCSF_total, ylab= "Total Score", main="Mental Health Continuum Short Form")
 
 analysis <- rbind(analysis, list("MHCSF_total", MHCSF_total_mean, 
                                  MHCSF_total_std, MHCSF_total_rr))
@@ -179,7 +174,7 @@ PE_avg_mean <- mean(dataset$PE_avg, na.rm=TRUE)
 PE_avg_var <- var(dataset$PE_avg, na.rm = TRUE)
 PE_avg_std <- std(dataset$PE_avg)
 PE_avg_rr <- response_rate(dataset$PE_avg)
-PE_avg_box <- boxplot(dataset$PE_avg)
+PE_avg_box <- boxplot(dataset$PE_avg, main="Average Positive Emotion Rating")
 
 analysis <- rbind(analysis, list("PE_avg", PE_avg_mean, 
                                  PE_avg_std, PE_avg_rr))
@@ -189,7 +184,7 @@ Resilience_avg_mean <- mean(dataset$Resilience_avg, na.rm=TRUE)
 Resilience_avg_var <- var(dataset$Resilience_avg, na.rm = TRUE)
 Resilience_avg_std <- std(dataset$Resilience_avg)
 Resilience_avg_rr <- response_rate(dataset$Resilience_avg)
-Resilience_avg_box <- boxplot(dataset$Resilience_avg)
+Resilience_avg_box <- boxplot(dataset$Resilience_avg, main="Average of Resilience Score")
 
 analysis <- rbind(analysis, list("Resilience_avg", Resilience_avg_mean, 
                                  Resilience_avg_std, Resilience_avg_rr))
@@ -204,7 +199,7 @@ Relationship_satis_rr <- response_rate(dataset$Relationship_satis)
 Relationship_satis_box <- boxplot(dataset$Relationship_satis)
 Relationship_satis_hist<- hist(na.omit(dataset$Relationship_satis), breaks = c(0,1,2,3,4,5), 
      xlab="Satisfaction with Relationships with People at Hendrix",
-     freq = FALSE, labels = c("Strongly Disagree","","","", "Strongly Agree"), 
+     freq = FALSE, labels = c("Strongly \n Disagree","","","", "Strongly \n Agree"), ylim = range(0,0.4),
      main="Relationship Satisfaction")
 
 analysis <- rbind(analysis, list("Relationship_satis", Relationship_satis_mean, 
@@ -216,7 +211,7 @@ Belonging_total_mean <- mean(dataset$Belonging_total, na.rm=TRUE)
 Belonging_total_var <- var(dataset$Belonging_total, na.rm = TRUE)
 Belonging_total_std <- std(dataset$Belonging_total)
 Belonging_total_rr <- response_rate(dataset$Belonging_total)
-Belonging_total_box <- boxplot(dataset$Belonging_total)
+Belonging_total_box <- boxplot(dataset$Belonging_total, main="Feelings of Belongingness")
 
 analysis <- rbind(analysis, list("Belonging_total", Belonging_total_mean, 
                                  Belonging_total_std, Belonging_total_rr))
@@ -342,7 +337,7 @@ Depression_total_mean <- mean(dataset$Depression_total, na.rm=TRUE)
 Depression_total_var <- var(dataset$Depression_total,na.rm = TRUE)
 Depression_total_std <- std(dataset$Depression_total)
 Depression_total_rr <- response_rate(dataset$Depression_total)
-Depression_total_box <- boxplot(dataset$Depression_total)
+Depression_total_box <- boxplot(dataset$Depression_total, main="Depression Total")
 
 analysis <- rbind(analysis, list("Depression_total", Depression_total_mean, 
                                  Depression_total_std, Depression_total_rr))
@@ -371,7 +366,7 @@ Anxiety_total_mean <- mean(dataset$Anxiety_total, na.rm=TRUE)
 Anxiety_total_var <- var(dataset$Anxiety_total,na.rm = TRUE)
 Anxiety_total_std <- std(dataset$Anxiety_total)
 Anxiety_total_rr <- response_rate(dataset$Anxiety_total)
-Anxiety_total_box <- boxplot(dataset$Anxiety_total)
+Anxiety_total_box <- boxplot(dataset$Anxiety_total, main="Total Anxiety")
 
 analysis <- rbind(analysis, list("Anxiety_total", Anxiety_total_mean, 
                                  Anxiety_total_std, Anxiety_total_rr))
@@ -409,7 +404,7 @@ ED_total_std <- sqrt(ED_total_var)
 ED_total_rr <- response_rate(dataset$ED_total)
 ED_total_hist <- hist(na.omit(dataset$ED_total), breaks = c(-1,5, 10, 15, 20, 25, 30, 35, 40, 45), 
                       xlab="Eating Behaviour Impariment Level",
-                      freq = FALSE, labels = c("","","","At Risk","","","","","",""), 
+                      freq = TRUE, labels = c("","","","At \n Risk","","","","","",""), ylim=range(0,200), 
                       main="Eating Disorder")
 
 
@@ -656,7 +651,7 @@ Managing_stress_mean <- mean(dataset$Managing_stress, na.rm=TRUE)
 Managing_stress_var <- var(dataset$Managing_stress, na.rm = TRUE)
 Managing_stress_std <- sqrt(Managing_stress_var)
 Managing_stress_rr <- response_rate(dataset$Managing_stress)
-Managing_stress_box <- boxplot(dataset$Managing_stress)
+Managing_stress_box <- boxplot(dataset$Managing_stress, main="Managing Stress")
 
 analysis <- rbind(analysis, list("Managing_stress", Managing_stress_mean, 
                                  Managing_stress_std, Managing_stress_rr))
@@ -678,16 +673,16 @@ analysis <- rbind(analysis, list("Hours_sleep", Hours_sleep_mean,
 
 
 #Sleep Quality (Scale: 1=very good - 4=very bad)
-Sleep_quality_min <- min(dataset$Sleep_quality, na.rm=TRUE) #minimum
-Sleep_quality_max <- max(dataset$Sleep_quality, na.rm=TRUE) #maximum
-Sleep_quality_mean <- mean(dataset$Sleep_quality, na.rm=TRUE) 
-Sleep_quality_var <- var(dataset$Sleep_quality, na.rm = TRUE)
-Sleep_quality_std <- sqrt(Sleep_quality_var)
-Sleep_quality_rr <- response_rate(dataset$Sleep_quality)
-Sleep_quality_box <- boxplot(dataset$Sleep_quality)
+Sleep_quality_R_min <- min(dataset$Sleep_quality_R, na.rm=TRUE) #minimum
+Sleep_quality_R_max <- max(dataset$Sleep_quality_R, na.rm=TRUE) #maximum
+Sleep_quality_R_mean <- mean(dataset$Sleep_quality_R, na.rm=TRUE) 
+Sleep_quality_R_var <- var(dataset$Sleep_quality_R, na.rm = TRUE)
+Sleep_quality_R_std <- sqrt(Sleep_quality_R_var)
+Sleep_quality_R_rr <- response_rate(dataset$Sleep_quality)
+Sleep_quality_R_box <- boxplot(dataset$Sleep_quality_R, main="Overall Sleep Quality")
 
-analysis <- rbind(analysis, list("Sleep_quality", Sleep_quality_mean, 
-                                 Sleep_quality_std, Sleep_quality_rr))
+analysis <- rbind(analysis, list("Sleep_quality_R", Sleep_quality_R_mean, 
+                                 Sleep_quality_R_std, Sleep_quality_R_rr))
 
 
 #Sleep Hygiene (Scale: 14=very good - 70=very bad)
@@ -697,7 +692,7 @@ SHI_total_mean <- mean(dataset$SHI_total, na.rm=TRUE)
 SHI_total_var <- var(dataset$SHI_total, na.rm = TRUE)
 SHI_total_std <- sqrt(SHI_total_var)
 SHI_total_rr <- response_rate(dataset$SHI_total)
-SHI_total_box <- boxplot(dataset$SHI_total)
+SHI_total_box <- boxplot(dataset$SHI_total, main="Sleep Hygiene Index Totals")
 
 analysis <- rbind(analysis, list("SHI_total", SHI_total_mean, 
                                  SHI_total_std, SHI_total_rr))
@@ -830,25 +825,27 @@ Availability_PH_services_none <- sum(Availability_PH_services_tbl[names(Availabi
 Availability_PH_services_hist <- hist(dataset$Availability_PH_services, breaks = c(0,1,2,3,4), xlab="Availability of PH services")
 
 # In the last year, I needed MH help (1=stongly disagree - 6 = strongly agree)
-MH_needs_R_mean <- mean(dataset$MH_needs_R, na.rm=TRUE) 
-MH_needs_R_var <- var(dataset$MH_needs_R, na.rm = TRUE)
-MH_needs_R_std <- std(dataset$MH_needs_R)
-MH_needs_R_rr <- response_rate(dataset$MH_needs_R)
-MH_needs_R_box <- boxplot(dataset$MH_needs_R)
+MH_needs_mean <- mean(dataset$MH_needs, na.rm=TRUE) 
+MH_needs_var <- var(dataset$MH_needs, na.rm = TRUE)
+MH_needs_std <- std(dataset$MH_needs)
+MH_needs_rr <- response_rate(dataset$MH_needs)
+MH_needs_box <- boxplot(dataset$MH_needs)
+MH_needs_hist <- hist(dataset$MH_needs, breaks = c(0,1,2,3,4,5,6), main="Mental Health Needs", labels = c("Strongly \n Disagree","","",""
+                                                                                         ,"","Strongly  Agree"), freq = FALSE)
 
-analysis <- rbind(analysis, list("MH_needs_R", MH_needs_R_mean, 
-                                 MH_needs_R_std, MH_needs_R_rr))
+analysis <- rbind(analysis, list("MH_needs", MH_needs_mean, 
+                                 MH_needs_std, MH_needs_rr))
 
 
 # In the last year, I felt my MH needs were met (1=stongly disagree - 6 = strongly agree)
-MH_needs_met_R_mean <- mean(dataset$MH_needs_met_R, na.rm=TRUE) 
-MH_needs_met_R_var <-var(dataset$MH_needs_met_R, na.rm = TRUE)
-MH_needs_met_R_std <-std(dataset$MH_needs_met_R)
-MH_needs_met_R_rr <-response_rate(dataset$MH_needs_met_R)
-MH_needs_met_R_box <-boxplot(dataset$MH_needs_met_R)
+MH_needs_met_mean <- mean(dataset$MH_needs_met, na.rm=TRUE) 
+MH_needs_met_var <-var(dataset$MH_needs_met, na.rm = TRUE)
+MH_needs_met_std <-std(dataset$MH_needs_met)
+MH_needs_met_rr <-response_rate(dataset$MH_needs_met)
+MH_needs_met_box <-boxplot(dataset$MH_needs_met)
 
-analysis <- rbind(analysis, list("MH_needs_met_R", MH_needs_met_R_mean, 
-                                 MH_needs_met_R_std, MH_needs_met_R_rr))
+analysis <- rbind(analysis, list("MH_needs_met", MH_needs_met_mean, 
+                                 MH_needs_met_std, MH_needs_met_rr))
 
 
 # factors that have caused respondents to receive fewer mental health 
@@ -878,7 +875,7 @@ Stigma_total_mean <- mean(dataset$Stigma_total, na.rm=TRUE)
 Stigma_total_var <- var(dataset$Stigma_total, na.rm = TRUE)
 Stigma_total_std <- std(dataset$Stigma_total)
 Stigma_total_rr <- response_rate(dataset$Stigma_total)
-Stigma_total_box <- boxplot(dataset$Stigma_total)
+Stigma_total_box <- boxplot(dataset$Stigma_total, ylab="Total Ratings of Mental Health Stigma")
 
 analysis <- rbind(analysis, list("Stigma_total", Stigma_total_mean, 
                                  Stigma_total_std, Stigma_total_rr))
@@ -906,9 +903,10 @@ analysis <- rbind(analysis, list("Concealment_total", Concealment_total_mean,
 #3-5 days - 3
 #6 or more days - 4
 MH_academic_impact_tbl <- table(na.omit(dataset$MH_academic_impact)) 
-MH_academic_impact_hist <- hist(dataset$MH_academic_impact,  breaks = c(0,1,2,3,4), 
+par(mar=c(5,6,4,1)+.1)
+MH_academic_impact_hist <- hist(dataset$MH_academic_impact,  breaks = c(0,1,2,3,4),
                                 freq = FALSE, labels = c("0", "1-2", "3-5", ">5"), 
-                                xlab = "Days of Hurt Academic Performance", 
+                                xlab = "Days of Hurt Academic Performance", ylim = range(0,0.35),
                                 main = "MH Affecting Academic Performance in Past Month")
 
 PH_academic_impact_tbl <- table(dataset$PH_academic_impact)
@@ -1030,6 +1028,6 @@ correlations <- cor(dataset[sapply(dataset, is.numeric)], use="pairwise", method
 
 #Be aware that the headers will be shifted over one if you open in Excel
 #Export the dataframes to a CSV:
-write.table(analysis, "C:/Users/kates/Desktop/HWBS2017_Analysis.txt", sep=",")
-write.table(corcov, "C:/Users/kates/Desktop/HWBS2017_CorCov.txt", sep=",")
-write.table(correlations, "C:/Users/kates/Desktop/HWBS2017_Correlations.txt", sep=",")
+write.table(analysis, "C:/Users/kates/Desktop/HWBI/HWBS/HWBS2017_Analysis.txt", sep=",")
+write.table(corcov, "C:/Users/kates/Desktop/HWBI/HWBS/HWBS2017_CorCov.txt", sep=",")
+write.table(correlations, "C:/Users/kates/Desktop/HWBI/HWBS/HWBS2017_Correlations.txt", sep=",")

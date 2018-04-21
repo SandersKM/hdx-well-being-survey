@@ -65,18 +65,18 @@ sum(Availability_PH_services_tbl[names(Availability_PH_services_tbl)==4])/sum(Av
 hist(dataset$Availability_PH_services, breaks = c(0,1,2,3,4), xlab="Availability of PH services")
 
 # In the last year, I needed MH help (1=stongly disagree - 6 = strongly agree)
-mean(dataset$MH_needs_R, na.rm=TRUE) 
-var(dataset$MH_needs_R, na.rm = TRUE)
-std(dataset$MH_needs_R)
-response_rate(dataset$MH_needs_R)
-boxplot(dataset$MH_needs_R)
+mean(dataset$MH_needs , na.rm=TRUE) 
+var(dataset$MH_needs , na.rm = TRUE)
+std(dataset$MH_needs )
+response_rate(dataset$MH_needs )
+boxplot(dataset$MH_needs )
 
 # In the last year, I felt my MH needs were met (1=stongly disagree - 6 = strongly agree)
-mean(dataset$MH_needs_met_R, na.rm=TRUE) 
-var(dataset$MH_needs_met_R, na.rm = TRUE)
-std(dataset$MH_needs_met_R)
-response_rate(dataset$MH_needs_met_R)
-boxplot(dataset$MH_needs_met_R)
+mean(dataset$MH_needs_met , na.rm=TRUE) 
+var(dataset$MH_needs_met , na.rm = TRUE)
+std(dataset$MH_needs_met )
+response_rate(dataset$MH_needs_met )
+boxplot(dataset$MH_needs_met )
 
 # factors that have caused respondents to receive fewer mental health 
 # services than they would have liked to receive

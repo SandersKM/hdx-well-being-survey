@@ -41,8 +41,19 @@ response_rate(dataset$Alcohol_use)
 boxplot(dataset$Alcohol_use)
 #histogram of how often respondents drink
 hist(dataset$Alcohol_use, breaks = c(0,1,2,3,4,5), xlab="Drinks in the Past Month",
-     freq = FALSE, labels = c("Never", "Once", "2-4 Times Total", "2-3 Times Per Week", 
-                              "> 4 Times Per Week"), main="Alcohol Use")
+     freq = FALSE, labels = c("Never", "Once", "2-4 Times\nTotal", "2-3 Times\nPer Week", 
+                              "> 4 Times\nPer Week"), main="Alcohol Use",mar = c(5, 2, 2, 2), ylim = range(0,0.5))
+
+mean(dataset$Cigarette_use, na.rm=TRUE) 
+var(dataset$Cigarette_use, na.rm = TRUE)
+std(dataset$Cigarette_use)
+response_rate(dataset$Cigarette_use)
+boxplot(dataset$Cigarette_use)
+#histogram of how often respondents smoke
+hist(dataset$Cigarette_use, breaks = c(0,1,2,3,4,5), xlab="Cigarettes Per Day in the Past Month",
+     freq = FALSE, labels = c("0", "< 1", "1-5", "Half Pack", 
+                              "> 1 Pack"), main="Cigarette Use", ylim=range(0,1))
+
 
 #Drinking score 
 mean(dataset$Drinking, na.rm=TRUE) 
