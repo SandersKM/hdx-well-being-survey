@@ -843,6 +843,9 @@ MH_needs_met_var <-var(dataset$MH_needs_met, na.rm = TRUE)
 MH_needs_met_std <-std(dataset$MH_needs_met)
 MH_needs_met_rr <-response_rate(dataset$MH_needs_met)
 MH_needs_met_box <-boxplot(dataset$MH_needs_met)
+MH_needs_met_hist <- hist(dataset$MH_needs_met, breaks = c(-1,0,1,2,3,4,5,6), main="Mental Health Needs Met", 
+     labels = c("No\nBarriers","Strongly\nDisagree","Disagree","Somewhat\nDisagree","Somewhat\nAgree","Agree","Strongly\nAgree"), freq = FALSE, ylim = range(0,0.3))
+MH_needs_met_NA <- sum(is.na(dataset$MH_needs_met))
 
 analysis <- rbind(analysis, list("MH_needs_met", MH_needs_met_mean, 
                                  MH_needs_met_std, MH_needs_met_rr))

@@ -539,11 +539,11 @@ boxplot(dataset$HDX_MH_impact[dataset$Year==1],dataset$HDX_MH_impact[dataset$Yea
         main="Hendrix Mental Health Impact", names=c("Freshmen", "Sophomores","Juniors","Seniors"))
 
 
-boxplot(dataset$MI_identity_R[dataset$Disability_status==1],dataset$MI_identity_R[dataset$Disability_status==2],
-        main="Mental Illness Identity", names=c("Disabled", "Able Bodied"))
+boxplot(dataset$MHCSF_total[dataset$Disability_status==1],dataset$MHCSF_total[dataset$Disability_status==2],
+        main="Mental Health Contiuum Short Form ", names=c("Disabled", "Able Bodied"))
 
-boxplot(dataset$Anxiety_total[dataset$First_gen==1],dataset$Anxiety_total[dataset$First_gen==2],
-        main="Anxiety Total", names=c("First Generation", "Not First Generation"))
+boxplot(dataset$Belonging_total[dataset$First_gen==1],dataset$Belonging_total[dataset$First_gen==2],
+        main="Total Belonging ", names=c("First Generation", "Not First Generation"))
 
 boxplot(dataset$Overall_stress[dataset$Sexual_orientation==9],dataset$Overall_stress[dataset$Sexual_orientation==2],
         dataset$Overall_stress[dataset$Sexual_orientation==3],dataset$Overall_stress[dataset$Sexual_orientation==4],
@@ -553,11 +553,11 @@ boxplot(dataset$Overall_stress[dataset$Sexual_orientation==9],dataset$Overall_st
         main="Overall Stress", names=c("Heterosexual", "Bisexual", "Gay", "Lesbian","Pansexual","Queer", "Asexual",
                                          "Questioning","Other"), mar = c(5, 2, 2, 2) , las = 2)
 
-boxplot(dataset$Depression_total[dataset$Sexual_orientation==9],dataset$Depression_total[dataset$Sexual_orientation!=9],
-        main="Total Depression", names=c("Heterosexual", "LGBTQA+"))
+boxplot(dataset$MH_needs[dataset$Sexual_orientation==9],dataset$MH_needs[dataset$Sexual_orientation!=9],
+        main="Mental Health Needs", names=c("Heterosexual", "LGBTQA+"))
 
-boxplot(dataset$MH_needs[dataset$Gender==1],dataset$MH_needs[dataset$Gender==2],dataset$MH_needs[dataset$Gender==3],
-        main="Mental Health Needs", names=c("Male", "Female", "Other"))
+boxplot(dataset$HDX_MH_impact[dataset$Gender==1],dataset$HDX_MH_impact[dataset$Gender==2],dataset$HDX_MH_impact[dataset$Gender==3],
+        main="HDX MH Impact", names=c("Male", "Female", "Other"))
 
 boxplot(dataset$MHCSF_total[dataset$SESrung ==1],dataset$MHCSF_total[dataset$SESrung ==2],
         dataset$MHCSF_total[dataset$SESrung ==3],dataset$MHCSF_total[dataset$SESrung ==4],
@@ -577,15 +577,19 @@ boxplot(dataset$Overall_MH[dataset$Religious_affiliation ==1],dataset$Overall_MH
         main="Overall Mental Health", names = c("Agnostic", "Athiest", "Catholic", "Christian", "Jewish",
                                       "Muslim", "No Pref", "Other", "Multiple"))
 
-
-boxplot(dataset$MI_identity_R[dataset$Humanities==1],dataset$MI_identity_R[dataset$Social_sciences==1],
-        dataset$MI_identity_R[dataset$Natural_sciences==1],dataset$MI_identity_R[dataset$Interdisciplinary==1],
-        dataset$MI_identity_R[dataset$Undeclared==1], las = 2,
-        main="Mental Illness Identity", names=c("Humanities", "Social Sciences", "Natural Sciences", "Interdisciplinary",
+par(mar=c(8,6,4,2)+0.1)
+boxplot(dataset$MH_needs[dataset$Humanities==1],
+        dataset$MH_needs[dataset$Social_sciences==1],
+        dataset$MH_needs[dataset$Natural_sciences==1],
+        dataset$MH_needs[dataset$Interdisciplinary==1],
+        dataset$MH_needs[dataset$Undeclared==1], las =2,
+        main="Mental Health Needs", names=c("Humanities", "Social Sciences", "Natural Sciences", "Interdisciplinary",
                                             "Undeclared"))
 
-boxplot(dataset$MH_academic_impact[dataset$Trans==1],dataset$MH_academic_impact[dataset$Trans!=1],
-        main="Mental Health Academic Impact", names=c("Trans", "Cis"))
+boxplot(dataset$MH_needs[dataset$Trans==1],dataset$MH_needs[dataset$Trans!=1],
+        main="Mental Health Needs", names=c("Trans", "Cis"))
+
+
 
 
 boxplot(dataset$Belonging_total[dataset$Race ==2],
